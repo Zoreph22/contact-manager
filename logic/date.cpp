@@ -4,22 +4,22 @@
 Date::Date()
 {
     time_t n = time(0);
-    this->d = localtime(&n);
+    this->d = *localtime(&n);
 }
 
 unsigned int Date::getJour() const
 {
-    return this->d->tm_mday;
+    return this->d.tm_mday;
 }
 
 unsigned int Date::getMois() const
 {
-    return this->d->tm_mon+1;
+    return this->d.tm_mon+1;
 }
 
 unsigned int Date::getAnnee() const
 {
-    return this->d->tm_year+1900;
+    return this->d.tm_year+1900;
 }
 
 string Date::toString() const
@@ -36,5 +36,5 @@ void Date::fromDate(const int j, const int m, const int a)
     md->tm_mon = m - 1;
     md->tm_year = a - 1900;
     mt = mktime(md);
-    this->d = localtime(&mt);
+    this->d = *localtime(&mt);
 }

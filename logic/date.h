@@ -6,7 +6,7 @@ using namespace std;
 class Date
 {
 private:
-    struct tm* d;
+    struct tm d;
 public:
     Date();
     unsigned int getJour() const;

@@ -5,21 +5,21 @@ CONFIG -= qt
 
 SOURCES += \
         appmodel.cpp \
+        contactcollection.cpp \
+        contactmodel.cpp \
         date.cpp \
-        fichemodel.cpp \
         interactioncollection.cpp \
         interactionmodel.cpp \
         main.cpp \
-        requetefiche.cpp \
+        todocollection.cpp \
         todomodel.cpp
 
 HEADERS += \
     appmodel.h \
+    contactcollection.h \
+    contactmodel.h \
     date.h \
-    fichemodel.h \
     interactioncollection.h \
     interactionmodel.h \
-    requete.h \
-    requete_impl.h \
-    requetefiche.h \
+    todocollection.h \
     todomodel.h
