@@ -1,15 +1,21 @@
 #include "appmodel.h"
 
-Date *AppModel::getDateSuppression() const
+AppModel::AppModel() : dateSuppression(nullptr)
+{
+
+}
+
+AppModel::~AppModel()
+{
+
+}
+
+const Date *AppModel::getDateSuppression() const
 {
     return dateSuppression;
 }
 
-void AppModel::setDateSuppression(Date *newDateSuppression)
+void AppModel::setDateSuppression(const Date *newDateSuppression)
 {
-    dateSuppression = newDateSuppression;
-}
-
-AppModel::AppModel()
-{
+    dateSuppression = new Date(*newDateSuppression);
 }

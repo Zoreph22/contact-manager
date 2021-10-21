@@ -7,17 +7,25 @@ using namespace std;
 class TodoModel
 {
 private:
-    unsigned int id;
-    Date *dateTodo;
+    const unsigned int id;
+    const Date dateTodo;
     string resume;
 
 public:
-    TodoModel(unsigned int id);
+    TodoModel(const unsigned int id);
+    TodoModel(const unsigned int id, const Date dateTodo);
+    TodoModel(const TodoModel & todo);
+    ~TodoModel();
+
+    TodoModel &operator=(const TodoModel &todo);
+    bool operator==(const TodoModel &todo) const;
+    friend ostream &operator<<(ostream &out, const TodoModel &todo);
+
+
     unsigned int getId() const;
+    const Date &getDateTodo() const;
     const string &getResume() const;
     void setResume(const string &newResume);
-    Date *getDateTodo() const;
-    void setDateTodo(Date *newDateTodo);
 };
 
 #endif // TODOMODEL_H

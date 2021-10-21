@@ -6,11 +6,14 @@
 class AppModel
 {
 private:
-    Date *dateSuppression = nullptr;
+    Date *dateSuppression;
+
 public:
     AppModel();
-    Date *getDateSuppression() const;
-    void setDateSuppression(Date *newDateSuppression);
+    ~AppModel();
+
+    const Date *getDateSuppression() const;
+    void setDateSuppression(const Date *newDateSuppression);
 };
 
 #endif // APPMODEL_H

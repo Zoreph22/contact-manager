@@ -8,9 +8,18 @@ using namespace std;
 class InteractionCollection
 {
 public:
-    list<int> liste;
+    list<InteractionModel> interactions;
+
 public:
     InteractionCollection();
+    ~InteractionCollection();
+    void add(const InteractionModel & interaction);
+    void remove(const InteractionModel & interaction);
+    void clear();
+    unsigned int count() const;
+
+    const list<InteractionModel> &getInteractions() const;
+    void setInteractions(const list<InteractionModel> &newInteractions);
 };
 
 #endif // INTERACTIONCOLLECTION_H

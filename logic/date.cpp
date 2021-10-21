@@ -1,10 +1,22 @@
 #include "date.h"
 #include <ctime>
 
+double Date::getDiff(const Date &date) const
+{
+    struct tm d1 = this->d;
+    struct tm d2 = date.d;
+    return difftime(mktime(&d1), mktime(&d2));
+}
+
 Date::Date()
 {
     time_t n = time(0);
     this->d = *localtime(&n);
+}
+
+Date::~Date()
+{
+
 }
 
 unsigned int Date::getJour() const
@@ -37,4 +49,40 @@ void Date::fromDate(const int j, const int m, const int a)
     md->tm_year = a - 1900;
     mt = mktime(md);
     this->d = *localtime(&mt);
+}
+
+Date &Date::operator=(const Date &date)
+{
+    this->d = date.d;
+    return *this;
+}
+
+bool Date::operator==(const Date &date) const
+{
+    return this->getDiff(date) == 0;
+}
+
+bool Date::operator<(const Date &date) const
+{
+    return this->getDiff(date) < 0;
+}
+
+bool Date::operator<=(const Date &date) const
+{
+    return this->getDiff(date) <= 0;
+}
+
+bool Date::operator>(const Date &date) const
+{
+    return this->getDiff(date) > 0;
+}
+
+bool Date::operator>=(const Date &date) const
+{
+    return this->getDiff(date) >= 0;
+}
+
+ostream &operator<<(ostream &out, const Date &date)
+{
+    return out << date.toString();
 }

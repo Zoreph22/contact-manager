@@ -1,8 +1,54 @@
 #include "interactionmodel.h"
 
+
+InteractionModel::InteractionModel(const unsigned int id)
+    : id(id)
+{
+
+}
+
+InteractionModel::InteractionModel(const unsigned int id, const Date dateInteraction)
+    : id(id)
+    , dateInteraction(dateInteraction)
+{
+
+}
+
+InteractionModel::InteractionModel(const InteractionModel &interaction)
+    : id(interaction.id)
+    , dateInteraction(interaction.dateInteraction)
+{
+
+}
+
+InteractionModel::~InteractionModel()
+{
+
+}
+
+void InteractionModel::parseTodos()
+{
+
+}
+
+InteractionModel &InteractionModel::operator=(const InteractionModel &interaction)
+{
+
+}
+
+bool InteractionModel::operator==(const InteractionModel &interaction) const
+{
+
+}
+
 unsigned int InteractionModel::getId() const
 {
     return id;
+}
+
+const Date &InteractionModel::getDateInteraction() const
+{
+    return dateInteraction;
 }
 
 const string &InteractionModel::getCommentaire() const
@@ -25,29 +71,12 @@ void InteractionModel::setContenu(const string &newContenu)
     contenu = newContenu;
 }
 
-Date *InteractionModel::getDateInteraction() const
-{
-    return dateInteraction;
-}
-
-void InteractionModel::setDateInteraction(Date *newDateInteraction)
-{
-    dateInteraction = newDateInteraction;
-}
-
-list<TodoModel> *InteractionModel::getTodos() const
+const list<TodoModel> &InteractionModel::getTodos() const
 {
     return todos;
 }
 
-void InteractionModel::setTodos(list<TodoModel> *newTodos)
+void InteractionModel::setTodos(const list<TodoModel> &newTodos)
 {
     todos = newTodos;
-}
-
-InteractionModel::InteractionModel(unsigned int id)
-{
-    this->id = id;
-    this->dateInteraction = new Date();
-    this->todos = new list<TodoModel>();
 }
