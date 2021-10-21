@@ -28,12 +28,15 @@ TodoModel::~TodoModel()
 
 TodoModel &TodoModel::operator=(const TodoModel &todo)
 {
-
+    this->resume = todo.resume;
+    return *this;
 }
 
 bool TodoModel::operator==(const TodoModel &todo) const
 {
-
+    if(this->resume == todo.getResume() && this->dateTodo == todo.getDateTodo() && this->id == todo.getId())
+        return true;
+    return false;
 }
 
 unsigned int TodoModel::getId() const
