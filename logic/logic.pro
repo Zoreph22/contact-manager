@@ -16,6 +16,8 @@ SOURCES += \
 
 HEADERS += \
     appmodel.h \
+    collection.h \
+    collection_impl.h \
     contactcollection.h \
     contactmodel.h \
     date.h \

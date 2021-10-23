@@ -13,7 +13,11 @@ private:
 public:
     /// Retourner la date de la dernière suppression d'un contact, ou date vide si aucune suppression.
     const Date &getDateSuppression() const;
-    /// Définir la date de la dernière suppression d'un contact.
+    /**
+     * @brief Définir la date de la dernière suppression d'un contact.
+     * @param newDateSuppression Nouvelle date de suppression.
+     * @throw invalid_argument Nouvelle date de suppression < date de suppression actuel.
+     */
     void setDateSuppression(const Date &newDateSuppression);
 };
 

@@ -18,7 +18,16 @@ ContactModel::ContactModel(unsigned int id, const Date &dateCreation)
 }
 
 ContactModel::ContactModel(const ContactModel &contact)
-    : id(contact.id), nom(contact.nom), prenom(contact.prenom), entreprise(contact.entreprise), email(contact.email), tel(contact.tel), photo(contact.photo), dateCreation(contact.dateCreation), dateModification(contact.dateModification), interactions(contact.interactions)
+    : id(contact.id)
+    , nom(contact.nom)
+    , prenom(contact.prenom)
+    , entreprise(contact.entreprise)
+    , email(contact.email)
+    , tel(contact.tel)
+    , photo(contact.photo)
+    , dateCreation(contact.dateCreation)
+    , dateModification(contact.dateModification)
+    , interactions(contact.interactions)
 {
 }
 

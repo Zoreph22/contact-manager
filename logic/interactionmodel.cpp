@@ -20,7 +20,10 @@ InteractionModel::InteractionModel(unsigned int id, const Date &dateInteraction,
 }
 
 InteractionModel::InteractionModel(const InteractionModel &interaction)
-    : id(interaction.id), dateInteraction(interaction.dateInteraction), contenu(interaction.contenu), todos(interaction.todos)
+    : id(interaction.id)
+    , dateInteraction(interaction.dateInteraction)
+    , contenu(interaction.contenu)
+    , todos(interaction.todos)
 {
 }
 
