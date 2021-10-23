@@ -70,9 +70,13 @@ public:
      */
     void parseTodos();
 
+    /// Retourne une interaction copiée d'une autre date.
     InteractionModel &operator=(const InteractionModel &interaction);
+    /// Retourne @a true si les attributs sont égaux à ceux de l'autre interaction.
     bool operator==(const InteractionModel &interaction) const;
+    /// Retourne @a true si les attributs ne pas sont égaux à ceux de l'autre interaction.
     bool operator!=(const InteractionModel &interaction) const;
+    /// Retourne un flux sortant avec les attributs de l'interaction.
     friend ostream &operator<<(ostream &out, const InteractionModel &interaction);
 
     /// Retourner l'identifiant unique de l'interaction.

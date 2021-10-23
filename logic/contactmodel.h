@@ -59,9 +59,13 @@ public:
      */
     ContactModel(const ContactModel &contact);
 
+    /// Retourne un contact copié d'un autre contact.
     ContactModel &operator=(const ContactModel &contact);
+    /// Retourne @a true si les attributs sont égaux à ceux de l'autre contact.
     bool operator==(const ContactModel &contact) const;
+    /// Retourne @a true si les attributs ne sont pas égaux à ceux de l'autre contact.
     bool operator!=(const ContactModel &contact) const;
+    /// Retourner un flux sortant avec les attributs du contact.
     friend ostream &operator<<(ostream &out, const ContactModel &contact);
 
     /// Retourner l'identifiant unique.

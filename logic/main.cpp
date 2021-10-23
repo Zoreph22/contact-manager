@@ -24,7 +24,6 @@ using namespace std;
 
 void dateUnitTests()
 {
-    // Classe Date
     cout << "== DEBUT - Test Classe Date ==" << endl;
     Date dNull;
     Date dCustom1(22, 7, 2000);

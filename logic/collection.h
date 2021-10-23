@@ -27,7 +27,9 @@ public:
     /// Retourner le nombre d'instances dans la liste.
     unsigned int count() const;
 
+    /// Retourne @a true si les deux collections contiennent des instances égales.
     bool operator==(const Collection<T> &collection) const;
+    /// Retourner @a true si les deux collections ne contiennent pas des instances égales.
     bool operator!=(const Collection<T> &collection) const;
 
     /// Retourner la liste.

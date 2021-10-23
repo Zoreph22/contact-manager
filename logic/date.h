@@ -71,13 +71,21 @@ public:
     /// Retourner l'année, ou 0 si date nulle.
     unsigned int getAnnee() const;
 
+    /// Retourne une date copiée d'une autre date.
     Date &operator=(const Date &date);
+    /// Retourne @a true si les deux dates sont égales.
     bool operator==(const Date &date) const;
+    /// Retourne @a true si les deux dates ne sont pas égales.
     bool operator!=(const Date &date) const;
+    /// Retourne @a true si la date est inférieure à l'autre date.
     bool operator<(const Date &date) const;
+    /// Retourne @a true si la date est inférieure ou égale à l'autre date.
     bool operator<=(const Date &date) const;
+    /// Retourne @a true si la date est supérieure à l'autre date.
     bool operator>(const Date &date) const;
+    /// Retourne @a true si la date est supérieure ou égale à l'autre date.
     bool operator>=(const Date &date) const;
+    /// Retourne un flux sortant avec la date au format JJ/MM/AAAA.
     friend ostream &operator<<(ostream &out, const Date &date);
 
     /// La date est-telle nulle ?

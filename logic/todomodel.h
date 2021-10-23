@@ -47,9 +47,13 @@ public:
      */
     TodoModel(const TodoModel &todo);
 
+    /// Retourne un todo copié d'un autre todo.
     TodoModel &operator=(const TodoModel &todo);
+    /// Retourne @a true si les attributs des deux todos sont égaux.
     bool operator==(const TodoModel &todo) const;
+    /// Retourne @a true si les attributs des deux todos ne sont pas égaux.
     bool operator!=(const TodoModel &todo) const;
+    /// Retourne un flux sortant avec les attributs du todo.
     friend ostream &operator<<(ostream &out, const TodoModel &todo);
 
     /// Retourner l'identifiant unique du todo.
