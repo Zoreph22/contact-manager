@@ -1,15 +1,5 @@
 #include "contactcollection.h"
 
-ContactCollection::ContactCollection()
-{
-
-}
-
-ContactCollection::~ContactCollection()
-{
-
-}
-
 void ContactCollection::add(const ContactModel &contact)
 {
     this->contacts.push_back(contact);
@@ -30,14 +20,17 @@ unsigned int ContactCollection::count() const
     return this->contacts.size();
 }
 
+bool ContactCollection::operator==(const ContactCollection &collection) const
+{
+    return this->contacts == collection.contacts;
+}
+
+bool ContactCollection::operator!=(const ContactCollection &collection) const
+{
+    return !this->operator==(collection);
+}
 
 const list<ContactModel> &ContactCollection::getContacts() const
 {
-    return contacts;
+    return this->contacts;
 }
-
-void ContactCollection::setContacts(const list<ContactModel> &newContacts)
-{
-    contacts = newContacts;
-}
-

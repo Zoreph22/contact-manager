@@ -1,82 +1,108 @@
 #include "interactionmodel.h"
 
+unsigned int InteractionModel::idCount = 1;
 
-InteractionModel::InteractionModel(const unsigned int id)
-    : id(id)
+InteractionModel::InteractionModel(const string &contenu) : id(idCount++)
 {
-
+    this->dateInteraction.setNow();
+    this->setContenu(contenu);
 }
 
-InteractionModel::InteractionModel(const unsigned int id, const Date dateInteraction)
+InteractionModel::InteractionModel(unsigned int id, const Date &dateInteraction, const string &contenu)
     : id(id)
-    , dateInteraction(dateInteraction)
 {
+    if (dateInteraction.isNull()) {
+        throw invalid_argument("La date de l'interaction ne doit pas être vide");
+    }
 
+    this->dateInteraction = dateInteraction;
+    this->setContenu(contenu);
 }
 
 InteractionModel::InteractionModel(const InteractionModel &interaction)
-    : id(interaction.id)
-    , dateInteraction(interaction.dateInteraction)
+    : id(interaction.id), dateInteraction(interaction.dateInteraction), contenu(interaction.contenu), todos(interaction.todos)
 {
-
-}
-
-InteractionModel::~InteractionModel()
-{
-
 }
 
 void InteractionModel::parseTodos()
 {
+    this->todos.clear();
 
+    istringstream iss(this->contenu);
+
+    string line;
+    while (getline(iss, line))
+    {
+        smatch matches;
+
+        if (regex_match(line, matches, regex("^.*@todo (.+?)(?:$| ?@date (\\d{1,2}[\\/-]\\d{1,2}[\\/-]\\d{4})).*$")))
+        {
+            string resume = matches[1];
+            string dateStr = matches[2];
+
+            Date date; dateStr.empty() ? date.setNow() : date.fromString(dateStr);
+
+            TodoModel todo(resume);
+            todo.setDateTodo(date);
+
+            this->todos.add(todo);
+        }
+    }
 }
 
 InteractionModel &InteractionModel::operator=(const InteractionModel &interaction)
 {
-
+    this->id = interaction.id;
+    this->dateInteraction = interaction.dateInteraction;
+    this->contenu = interaction.contenu;
+    this->todos = interaction.todos;
+    return *this;
 }
 
 bool InteractionModel::operator==(const InteractionModel &interaction) const
 {
+    return this->id == interaction.id && this->dateInteraction == interaction.dateInteraction && this->contenu == interaction.contenu && this->todos == interaction.todos;
+}
 
+ostream &operator<<(ostream &out, const InteractionModel &interaction)
+{
+    return out << "(" << interaction.id << ")"
+               << " Date : " << interaction.dateInteraction
+               << " Contenu : " << interaction.contenu
+               << " Interactions : " << interaction.todos.count();
+}
+
+bool InteractionModel::operator!=(const InteractionModel &interaction) const
+{
+    return !this->operator==(interaction);
 }
 
 unsigned int InteractionModel::getId() const
 {
-    return id;
+    return this->id;
 }
 
 const Date &InteractionModel::getDateInteraction() const
 {
-    return dateInteraction;
-}
-
-const string &InteractionModel::getCommentaire() const
-{
-    return commentaire;
-}
-
-void InteractionModel::setCommentaire(const string &newCommentaire)
-{
-    commentaire = newCommentaire;
+    return this->dateInteraction;
 }
 
 const string &InteractionModel::getContenu() const
 {
-    return contenu;
+    return this->contenu;
 }
 
 void InteractionModel::setContenu(const string &newContenu)
 {
-    contenu = newContenu;
+    if (newContenu.empty())
+    {
+        throw invalid_argument("Le contenu de l'interaction ne doit pas être vide");
+    }
+
+    this->contenu = newContenu;
 }
 
-const list<TodoModel> &InteractionModel::getTodos() const
+const TodoCollection &InteractionModel::getTodos() const
 {
-    return todos;
-}
-
-void InteractionModel::setTodos(const list<TodoModel> &newTodos)
-{
-    todos = newTodos;
+    return this->todos;
 }

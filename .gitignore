@@ -1,4 +1,6 @@
 *.vpp.bak_*
+logic/docs
+.vscode
 
 # Prerequisites
 *.d
