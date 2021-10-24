@@ -60,11 +60,11 @@ bool ContactModel::operator!=(const ContactModel &contact) const
 ostream &operator<<(ostream &out, const ContactModel &contact)
 {
     return out
-           << "(" << contact.id << ") "
-           << contact.prenom << " " << contact.nom << endl
-           << contact.entreprise << endl
-           << contact.email << " " << contact.tel << endl
-           << contact.photo << endl
+           << "(" << contact.id << ")"
+           << " Prénom/nom : " << contact.prenom << " " << contact.nom << endl
+           << "Entreprise : " << contact.entreprise << endl
+           << "E-mail : " << contact.email << " Téléphone : " << contact.tel << endl
+           << "Photo : " << contact.photo << endl
            << "Création : " << contact.dateCreation << " Modification : " << contact.dateModification << endl;
 }
 
@@ -168,7 +168,7 @@ void ContactModel::setDateModification(const Date &newDateModification)
     dateModification = newDateModification;
 }
 
-InteractionCollection &ContactModel::getInteractions()
+InteractionCollection &ContactModel::getInteractions() const
 {
     return interactions;
 }

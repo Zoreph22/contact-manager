@@ -43,7 +43,7 @@ public:
     TodoModel(unsigned int id, const Date &dateTodo, const string &resume);
     /**
      * @brief Constructeur par copie.
-     * @param contact Todo à copier.
+     * @param todo Todo à copier.
      */
     TodoModel(const TodoModel &todo);
 

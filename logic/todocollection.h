@@ -1,7 +1,6 @@
 #ifndef TODOCOLLECTION_H
 #define TODOCOLLECTION_H
 
-#include <iostream>
 #include <list>
 #include "collection.h"
 #include "todomodel.h"

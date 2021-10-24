@@ -34,7 +34,9 @@ void Date::fromDate(const unsigned int j, const unsigned int m, const unsigned i
     md->tm_mday = j;
     md->tm_mon = m - 1;
     md->tm_year = a - 1900;
-    md->tm_hour = 2;
+    md->tm_hour = 12;
+    md->tm_min = 0;
+    md->tm_sec = 0;
     mt = mktime(md);
     this->setDate(*localtime(&mt));
 }
@@ -64,14 +66,14 @@ void Date::setNow()
 void Date::setNull()
 {
     struct tm date;
-    date.tm_hour = 0;
     date.tm_mday = 0;
-    date.tm_min = 0;
     date.tm_mon = 0;
-    date.tm_sec = 0;
     date.tm_wday = 0;
     date.tm_yday = 0;
     date.tm_year = 0;
+    date.tm_hour = 12;
+    date.tm_min = 0;
+    date.tm_sec = 0;
 
     this->date = date;
     this->nullDate = true;
@@ -147,6 +149,8 @@ bool Date::isNull() const
 void Date::setDate(const tm &newDate)
 {
     this->date = newDate;
-    this->date.tm_hour = 2;
+    this->date.tm_hour = 12;
+    this->date.tm_min = 0;
+    this->date.tm_sec = 0;
     this->nullDate = false;
 }

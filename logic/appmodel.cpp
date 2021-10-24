@@ -1,16 +1,18 @@
 #include "appmodel.h"
 
-const Date &AppModel::getDateSuppression() const
+Date AppModel::dateSuppression;
+
+const Date &AppModel::getDateSuppression()
 {
-    return this->dateSuppression;
+    return AppModel::dateSuppression;
 }
 
 void AppModel::setDateSuppression(const Date &newDateSuppression)
 {
-    if (newDateSuppression < this->dateSuppression)
+    if (newDateSuppression < AppModel::dateSuppression)
     {
         throw invalid_argument("La nouvelle date de suppression doit être supérieure ou égale à la date de suppression actuelle");
     }
 
-    this->dateSuppression = newDateSuppression;
+    AppModel::dateSuppression = newDateSuppression;
 }

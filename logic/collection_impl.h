@@ -1,6 +1,7 @@
 #ifndef COLLECTION_IMPL_H
 #define COLLECTION_IMPL_H
 
+#include <stdexcept>
 #include "collection.h"
 
 template<class T>
@@ -19,6 +20,22 @@ template<class T>
 void Collection<T>::clear()
 {
     this->liste.clear();
+}
+
+template<class T>
+T Collection<T>::getIndex(unsigned int index) const
+{
+    if (index > this->count() - 1) {
+        throw out_of_range("Index en dehors de la liste");
+    }
+
+    auto it = this->liste.begin();
+
+    for (unsigned int i = 0; i < index; i++) {
+        it++;
+    }
+
+    return *it;
 }
 
 template<class T>

@@ -2,7 +2,7 @@
 
 unsigned int TodoModel::idCount = 1;
 
-TodoModel::TodoModel(const string &resume) : id(idCount)
+TodoModel::TodoModel(const string &resume) : id(idCount++)
 {
     this->dateTodo.setNow();
     this->setResume(resume);
@@ -60,7 +60,7 @@ const Date &TodoModel::getDateTodo() const
 
 void TodoModel::setDateTodo(const Date &newDateTodo)
 {
-    if (dateTodo.isNull()) {
+    if (newDateTodo.isNull()) {
         throw invalid_argument("La date de réalisation du todo ne doit pas être vide");
     }
 

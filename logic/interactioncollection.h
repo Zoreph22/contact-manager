@@ -1,7 +1,6 @@
 #ifndef INTERACTIONCOLLECTION_H
 #define INTERACTIONCOLLECTION_H
 
-#include <list>
 #include "collection.h"
 #include "interactionmodel.h"
 

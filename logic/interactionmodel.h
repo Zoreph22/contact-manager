@@ -4,7 +4,6 @@
 #include <string>
 #include <iostream>
 #include <regex>
-#include <list>
 #include "todocollection.h"
 #include "todomodel.h"
 
@@ -12,8 +11,8 @@ using namespace std;
 
 /**
  * @brief Modèle stockant les informations d'une interaction d'un contact.
+ * @n
  * @n Une interaction possède un contenu texte contenant un commentaire et/ou des tags comme \@todo ou \@date.
- * @n La présence d'un tag \@todo correspond à une instance de @link TodoModel @endlink avec éventuellement une \@date de réalisation associée.
  * @n Voir @link InteractionModel::parseTodos() @endlink pour plus d'explications concernant les tags.
  * @n voir @link InteractionModel::setContenu() @endlink pour un exemple de contenu.
  * @see TodoModel
@@ -28,7 +27,7 @@ private:
     /// Contenu de l'interaction.
     string contenu;
     /// Liste des todos associés à l'interaction.
-    TodoCollection todos;
+    mutable TodoCollection todos;
 
 public:
     /**
@@ -56,7 +55,7 @@ public:
     InteractionModel(unsigned int id, const Date &dateInteraction, const string &contenu);
     /**
      * @brief Constructeur par copie.
-     * @param contact Interaction à copier.
+     * @param interaction Interaction à copier.
      */
     InteractionModel(const InteractionModel &interaction);
 
@@ -100,9 +99,7 @@ public:
      */
     void setContenu(const string &newContenu);
     /// Retourner la liste des todos associés à l'interaction.
-    const TodoCollection &getTodos() const;
-    /// Définir la liste des todos associés à l'interaction.
-    void setTodos(const TodoCollection &newTodos);
+    TodoCollection &getTodos() const;
 };
 
 #endif // INTERACTIONMODEL_H

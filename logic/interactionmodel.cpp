@@ -69,10 +69,9 @@ bool InteractionModel::operator==(const InteractionModel &interaction) const
 
 ostream &operator<<(ostream &out, const InteractionModel &interaction)
 {
-    return out << "(" << interaction.id << ")"
-               << " Date : " << interaction.dateInteraction
-               << " Contenu : " << interaction.contenu
-               << " Interactions : " << interaction.todos.count();
+    return out << "(" << interaction.id << ")" << " Date : " << interaction.dateInteraction << " Interactions : " << interaction.todos.count() << endl
+               << "Contenu :" << endl
+               << "'" << interaction.contenu << "'" << endl;
 }
 
 bool InteractionModel::operator!=(const InteractionModel &interaction) const
@@ -105,7 +104,7 @@ void InteractionModel::setContenu(const string &newContenu)
     this->contenu = newContenu;
 }
 
-const TodoCollection &InteractionModel::getTodos() const
+TodoCollection &InteractionModel::getTodos() const
 {
     return this->todos;
 }

@@ -12,7 +12,8 @@ SOURCES += \
         interactionmodel.cpp \
         main.cpp \
         todocollection.cpp \
-        todomodel.cpp
+        todomodel.cpp \
+        unit_tests.cpp
 
 HEADERS += \
     appmodel.h \
@@ -24,4 +25,5 @@ HEADERS += \
     interactioncollection.h \
     interactionmodel.h \
     todocollection.h \
-    todomodel.h
+    todomodel.h \
+    unit_tests.h

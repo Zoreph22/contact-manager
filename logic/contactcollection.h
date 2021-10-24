@@ -1,7 +1,6 @@
 #ifndef CONTACTCOLLECTION_H
 #define CONTACTCOLLECTION_H
 
-#include <iostream>
 #include "collection.h"
 #include "contactmodel.h"
 

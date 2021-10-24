@@ -31,7 +31,7 @@ private:
     /// Date de la dernière modification du contact.
     Date dateModification;
     /// Liste des interactions du contact.
-    InteractionCollection interactions;
+    mutable InteractionCollection interactions;
 
 public:
     /**
@@ -116,7 +116,7 @@ public:
      */
     void setDateModification(const Date &newDateModification);
     /// Retourner la liste des interactions du contact.
-    InteractionCollection &getInteractions();
+    InteractionCollection &getInteractions() const;
 };
 
 #endif // CONTACTMODEL_H
