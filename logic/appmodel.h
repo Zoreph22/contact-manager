@@ -11,6 +11,10 @@ private:
     static Date dateSuppression;
 
 public:
+    /* -------------------------------------------------------------------------- */
+    /*                                 Propriétés                                 */
+    /* -------------------------------------------------------------------------- */
+
     /// Retourner la date de la dernière suppression d'un contact, ou date vide si aucune suppression.
     static const Date &getDateSuppression();
     /**

@@ -41,6 +41,10 @@ public:
      */
     static unsigned int idCount;
 
+    /* -------------------------------------------------------------------------- */
+    /*                                Constructeurs                               */
+    /* -------------------------------------------------------------------------- */
+
     /**
      * @brief Constructeur par défaut.
      * Identifiant généré automatiquement, et date de création initialisée à la date du jour.
@@ -59,6 +63,10 @@ public:
      */
     ContactModel(const ContactModel &contact);
 
+    /* -------------------------------------------------------------------------- */
+    /*                                 Opérateurs                                 */
+    /* -------------------------------------------------------------------------- */
+
     /// Retourne un contact copié d'un autre contact.
     ContactModel &operator=(const ContactModel &contact);
     /// Retourne @a true si les attributs sont égaux à ceux de l'autre contact.
@@ -67,6 +75,10 @@ public:
     bool operator!=(const ContactModel &contact) const;
     /// Retourner un flux sortant avec les attributs du contact.
     friend ostream &operator<<(ostream &out, const ContactModel &contact);
+
+    /* -------------------------------------------------------------------------- */
+    /*                                 Propriétés                                 */
+    /* -------------------------------------------------------------------------- */
 
     /// Retourner l'identifiant unique.
     unsigned int getId() const;

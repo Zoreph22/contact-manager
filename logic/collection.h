@@ -18,6 +18,10 @@ private:
     mutable list<T> liste;
 
 public:
+    /* -------------------------------------------------------------------------- */
+    /*                                  Méthodes                                  */
+    /* -------------------------------------------------------------------------- */
+
     /// Ajouter une instance à la liste.
     void add(const T &instance);
     /// Supprimer une instance de la liste.
@@ -25,14 +29,9 @@ public:
     /// Vider la liste.
     void clear();
 
-    /**
-     * @brief Retourner un élément par son index dans la liste.
-     * @param index Index dans la liste.
-     * @throw out_of_range Index en dehors de la liste.
-     */
-    T getIndex(unsigned int index) const;
-    /// Retourner le nombre d'instances dans la liste.
-    unsigned int count() const;
+    /* -------------------------------------------------------------------------- */
+    /*                                 Opérateurs                                 */
+    /* -------------------------------------------------------------------------- */
 
     /// Retourne @a true si les deux collections contiennent des instances égales.
     bool operator==(const Collection<T> &collection) const;
@@ -48,6 +47,18 @@ public:
         return out;
     }
 
+    /* -------------------------------------------------------------------------- */
+    /*                                 Propriétés                                 */
+    /* -------------------------------------------------------------------------- */
+
+    /**
+     * @brief Retourner un élément par son index dans la liste.
+     * @param index Index dans la liste.
+     * @throw out_of_range Index en dehors de la liste.
+     */
+    T getIndex(unsigned int index) const;
+    /// Retourner le nombre d'instances dans la liste.
+    unsigned int count() const;
     /// Retourner la liste.
     const list<T> &getList() const;
 };

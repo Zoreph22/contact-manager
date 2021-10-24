@@ -37,6 +37,10 @@ public:
      */
     static unsigned int idCount;
 
+    /* -------------------------------------------------------------------------- */
+    /*                                Constructeurs                               */
+    /* -------------------------------------------------------------------------- */
+
     /**
      * @brief Constructeur par défaut.
      * Identifiant généré automatiquement, et date de création initialisée à la date du jour.
@@ -59,6 +63,10 @@ public:
      */
     InteractionModel(const InteractionModel &interaction);
 
+    /* -------------------------------------------------------------------------- */
+    /*                                  Méthodes                                  */
+    /* -------------------------------------------------------------------------- */
+
     /**
      * @brief Analyser le contenu de l'interaction et en extraire les todos.
      * Les todos extraits sont instanciés et ajoutés à la liste des todos de l'interaction.
@@ -69,6 +77,10 @@ public:
      */
     void parseTodos();
 
+    /* -------------------------------------------------------------------------- */
+    /*                                 Opérateurs                                 */
+    /* -------------------------------------------------------------------------- */
+
     /// Retourne une interaction copiée d'une autre date.
     InteractionModel &operator=(const InteractionModel &interaction);
     /// Retourne @a true si les attributs sont égaux à ceux de l'autre interaction.
@@ -77,6 +89,10 @@ public:
     bool operator!=(const InteractionModel &interaction) const;
     /// Retourne un flux sortant avec les attributs de l'interaction.
     friend ostream &operator<<(ostream &out, const InteractionModel &interaction);
+
+    /* -------------------------------------------------------------------------- */
+    /*                                 Propriétés                                 */
+    /* -------------------------------------------------------------------------- */
 
     /// Retourner l'identifiant unique de l'interaction.
     unsigned int getId() const;

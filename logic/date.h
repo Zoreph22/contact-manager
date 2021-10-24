@@ -20,6 +20,10 @@ private:
     double getDiff(const Date &date) const;
 
 public:
+    /* -------------------------------------------------------------------------- */
+    /*                                Constructeurs                               */
+    /* -------------------------------------------------------------------------- */
+
     /**
      * @brief Constructeur par défaut.
      * Date initialisée à vide.
@@ -39,6 +43,10 @@ public:
      */
     Date(const Date &date);
 
+    /* -------------------------------------------------------------------------- */
+    /*                                  Méthodes                                  */
+    /* -------------------------------------------------------------------------- */
+
     /**
      * @brief Définir la date à partir d'un jour, mois et année.
      * @param j Jour.
@@ -57,19 +65,10 @@ public:
      * @note Exemples de format de date valide : "22/07/2000", "22-07-2000", "22/7/2000", "22-7-2000".
      */
     void fromString(const string &date);
-    /// Définir la date sur la date du jour.
-    void setNow();
-    /// Définir la date sur une date vide.
-    void setNull();
 
-    /// Retourner la date en string (format JJ/MM/AAAA), ou string vide si date nulle.
-    string toString() const;
-    /// Retourner le jour du mois, ou 0 si date nulle.
-    unsigned int getJour() const;
-    /// Retourner le numéro du mois, ou 0 si date nulle.
-    unsigned int getMois() const;
-    /// Retourner l'année, ou 0 si date nulle.
-    unsigned int getAnnee() const;
+    /* -------------------------------------------------------------------------- */
+    /*                                 Opérateurs                                 */
+    /* -------------------------------------------------------------------------- */
 
     /// Retourne une date copiée d'une autre date.
     Date &operator=(const Date &date);
@@ -88,10 +87,26 @@ public:
     /// Retourne un flux sortant avec la date au format JJ/MM/AAAA.
     friend ostream &operator<<(ostream &out, const Date &date);
 
+    /* -------------------------------------------------------------------------- */
+    /*                                 Propriétés                                 */
+    /* -------------------------------------------------------------------------- */
+
     /// La date est-telle nulle ?
     bool isNull() const;
     /// Définir la date à partir d'une structure date C.
     void setDate(const tm &newDate);
+        /// Définir la date sur la date du jour.
+    void setNow();
+    /// Définir la date sur une date vide.
+    void setNull();
+    /// Retourner la date en string (format JJ/MM/AAAA), ou string vide si date nulle.
+    string toString() const;
+    /// Retourner le jour du mois, ou 0 si date nulle.
+    unsigned int getJour() const;
+    /// Retourner le numéro du mois, ou 0 si date nulle.
+    unsigned int getMois() const;
+    /// Retourner l'année, ou 0 si date nulle.
+    unsigned int getAnnee() const;
 };
 
 #endif // DATE_H

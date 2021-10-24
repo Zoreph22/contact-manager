@@ -25,6 +25,10 @@ public:
      */
     static unsigned int idCount;
 
+    /* -------------------------------------------------------------------------- */
+    /*                                Constructeurs                               */
+    /* -------------------------------------------------------------------------- */
+
     /**
      * @brief Constructeur par défaut.
      * Identifiant généré automatiquement, et date de réalisation initialisée à la date du jour.
@@ -47,6 +51,10 @@ public:
      */
     TodoModel(const TodoModel &todo);
 
+    /* -------------------------------------------------------------------------- */
+    /*                                 Opérateurs                                 */
+    /* -------------------------------------------------------------------------- */
+
     /// Retourne un todo copié d'un autre todo.
     TodoModel &operator=(const TodoModel &todo);
     /// Retourne @a true si les attributs des deux todos sont égaux.
@@ -55,6 +63,10 @@ public:
     bool operator!=(const TodoModel &todo) const;
     /// Retourne un flux sortant avec les attributs du todo.
     friend ostream &operator<<(ostream &out, const TodoModel &todo);
+
+    /* -------------------------------------------------------------------------- */
+    /*                                 Propriétés                                 */
+    /* -------------------------------------------------------------------------- */
 
     /// Retourner l'identifiant unique du todo.
     unsigned int getId() const;
