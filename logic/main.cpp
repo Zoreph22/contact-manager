@@ -30,15 +30,15 @@ void testGlobal()
 
     string contenu2 = "@todo Appeler chef";
 
-    InteractionModel m1(contenu1);
-    InteractionModel m2(contenu2);
-    m1.parseTodos();
-    m2.parseTodos();
+    InteractionModel i1(contenu1);
+    InteractionModel i2(contenu2);
+    i1.parseTodos();
+    i2.parseTodos();
 
-    c.getInteractions().add(m1);
-    c.getInteractions().add(m2);
+    c.getInteractions().add(i1);
+    c.getInteractions().add(i2);
 
-    // Affichage les informations du contact.
+    // Afficher les informations du contact.
     cout << "#### Informations du contact ####" << endl;
     cout << c << endl;
 
@@ -64,10 +64,10 @@ void testGlobal()
 
 int main()
 {
-    dateUnitTests();                cout << endl;
-    todoModelUnitTests();           cout << endl;
     collectionUnitTests();          cout << endl;
+    dateUnitTests();                cout << endl;
     appModelUnitTests();            cout << endl;
+    todoModelUnitTests();           cout << endl;
     interactionModelUnitTests();    cout << endl;
     contactModelUnitTests();        cout << endl;
     testGlobal();                   cout << endl;

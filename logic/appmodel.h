@@ -16,7 +16,7 @@ public:
     /**
      * @brief Définir la date de la dernière suppression d'un contact.
      * @param newDateSuppression Nouvelle date de suppression.
-     * @throw invalid_argument Nouvelle date de suppression < date de suppression actuel.
+     * @throw invalid_argument Nouvelle date de suppression < date de suppression actuelle.
      */
     static void setDateSuppression(const Date &newDateSuppression);
 };
