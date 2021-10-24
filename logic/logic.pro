@@ -4,7 +4,6 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-        appmodel.cpp \
         contactcollection.cpp \
         contactmodel.cpp \
         date.cpp \
@@ -16,7 +15,6 @@ SOURCES += \
         unit_tests.cpp
 
 HEADERS += \
-    appmodel.h \
     collection.h \
     collection_impl.h \
     contactcollection.h \

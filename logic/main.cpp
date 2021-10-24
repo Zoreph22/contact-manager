@@ -66,7 +66,6 @@ int main()
 {
     collectionUnitTests();          cout << endl;
     dateUnitTests();                cout << endl;
-    appModelUnitTests();            cout << endl;
     todoModelUnitTests();           cout << endl;
     interactionModelUnitTests();    cout << endl;
     contactModelUnitTests();        cout << endl;

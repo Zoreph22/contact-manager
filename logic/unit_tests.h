@@ -38,9 +38,6 @@ void todoModelUnitTests();
 /// Démarrer les tests unitaires de la classe @link Collection @endlink.
 void collectionUnitTests();
 
-/// Démarrer les tests unitaires de la classe @link AppModel @endlink.
-void appModelUnitTests();
-
 /// Démarrer les tests unitaires de la classe @link InteractionModel @endlink.
 void interactionModelUnitTests();
 

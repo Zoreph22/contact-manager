@@ -12,6 +12,9 @@ using namespace std;
 class ContactModel
 {
 private:
+    /// Date de la dernière suppression d'un contact. Date vide si aucune dernière suppression.
+    static Date dateSuppression;
+
     /// Identifiant unique du contact.
     unsigned int id;
     /// Nom.
@@ -40,6 +43,15 @@ public:
      * @brief Numéro d'identifiant maximal généré.
      */
     static unsigned int idCount;
+
+    /// Retourner la date de la dernière suppression d'un contact, ou date vide si aucune suppression.
+    static const Date &getDateSuppression();
+    /**
+     * @brief Définir la date de la dernière suppression d'un contact.
+     * @param newDateSuppression Nouvelle date de suppression.
+     * @throw invalid_argument Nouvelle date de suppression < date de suppression actuelle.
+     */
+    static void setDateSuppression(const Date &newDateSuppression);
 
     /* -------------------------------------------------------------------------- */
     /*                                Constructeurs                               */

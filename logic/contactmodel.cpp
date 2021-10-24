@@ -2,6 +2,23 @@
 
 unsigned int ContactModel::idCount = 1;
 
+Date ContactModel::dateSuppression;
+
+const Date &ContactModel::getDateSuppression()
+{
+    return ContactModel::dateSuppression;
+}
+
+void ContactModel::setDateSuppression(const Date &newDateSuppression)
+{
+    if (newDateSuppression < ContactModel::dateSuppression)
+    {
+        throw invalid_argument("La nouvelle date de suppression doit être supérieure ou égale à la date de suppression actuelle");
+    }
+
+    ContactModel::dateSuppression = newDateSuppression;
+}
+
 ContactModel::ContactModel() : id(idCount++)
 {
     this->dateCreation.setNow();

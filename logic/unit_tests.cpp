@@ -3,7 +3,6 @@
 #include <string>
 
 #include "unit_tests.h"
-#include "appmodel.h"
 #include "collection.h"
 #include "contactmodel.h"
 #include "date.h"
@@ -369,37 +368,6 @@ void collectionUnitTests()
     cout << "== FIN - Test Classe Collection ==" << endl;
 }
 
-void appModelUnitTests()
-{
-    cout << "== DEBUT - Test Classe AppModel ==" << endl;
-
-    cout << "TEST - default" << endl;
-    {
-        assert(AppModel::getDateSuppression().isNull());
-    }
-
-    cout << "TEST - AppModel::setDateSuppression()" << endl;
-    {
-        Date dCustom1(22, 7, 2000);
-        Date dCustom2(21, 7, 2000);
-
-        AppModel::setDateSuppression(dCustom1);
-        assert(AppModel::getDateSuppression() == dCustom1);
-
-        ASSERT_EXCEPTION(invalid_argument, AppModel::setDateSuppression, dCustom2);
-    }
-
-    cout << "TEST - AppModel::getDateSuppression()" << endl;
-    {
-        Date dCustom1(22, 7, 2000);
-
-        AppModel::setDateSuppression(dCustom1);
-        assert(AppModel::getDateSuppression() == dCustom1);
-    }
-
-    cout << "== FIN - Test Classe AppModel ==" << endl;
-}
-
 void interactionModelUnitTests()
 {
     cout << "== DEBUT - Test Classe InteractionModel ==" << endl;
@@ -545,6 +513,31 @@ void contactModelUnitTests()
     cout << "== DEBUT - Test Classe ContactModel ==" << endl;
 
     ContactModel::idCount = 1;
+
+    cout << "TEST - static default" << endl;
+    {
+        assert(ContactModel::idCount == 1);
+        assert(ContactModel::getDateSuppression().isNull());
+    }
+
+    cout << "TEST - static ContactModel::setDateSuppression()" << endl;
+    {
+        Date dCustom1(22, 7, 2000);
+        Date dCustom2(21, 7, 2000);
+
+        ContactModel::setDateSuppression(dCustom1);
+        assert(ContactModel::getDateSuppression() == dCustom1);
+
+        ASSERT_EXCEPTION(invalid_argument, ContactModel::setDateSuppression, dCustom2);
+    }
+
+    cout << "TEST - static ContactModel::getDateSuppression()" << endl;
+    {
+        Date dCustom1(22, 7, 2000);
+
+        ContactModel::setDateSuppression(dCustom1);
+        assert(ContactModel::getDateSuppression() == dCustom1);
+    }
 
     cout << "TEST - constructors" << endl;
     {
