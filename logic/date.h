@@ -7,7 +7,7 @@
 
 using namespace std;
 
-/// Interface pour stocker et manipuler une date C (ne gère pas le temps).
+/// Classe utilitaire pour stocker et manipuler une date simplement (ne gère pas le temps).
 class Date
 {
 private:

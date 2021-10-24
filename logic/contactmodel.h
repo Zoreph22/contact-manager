@@ -112,7 +112,7 @@ public:
      * @brief Définir la date de la dernière modification du contact.
      * @param newDateModification Nouvelle date de modification.
      * @throw invalid_argument Nouvelle date de modification < date de création.
-     * @throw invalid_argument Nouvelle date de modification < date de modification actuel.
+     * @throw invalid_argument Nouvelle date de modification < date de modification actuelle.
      */
     void setDateModification(const Date &newDateModification);
     /// Retourner la liste des interactions du contact.

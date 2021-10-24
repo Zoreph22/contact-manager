@@ -8,7 +8,7 @@ using namespace std;
 
 template<class T>
 /**
- * @brief Classe collection pour gérer une liste d'instances d'une classe T.
+ * @brief Classe collection pour gérer une liste d'instances d'une classe @p T.
  * @tparam T Classe à lister.
  */
 class Collection

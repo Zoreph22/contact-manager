@@ -14,7 +14,7 @@ using namespace std;
  * @n
  * @n Une interaction possède un contenu texte contenant un commentaire et/ou des tags comme \@todo ou \@date.
  * @n Voir @link InteractionModel::parseTodos() @endlink pour plus d'explications concernant les tags.
- * @n voir @link InteractionModel::setContenu() @endlink pour un exemple de contenu.
+ * @n Voir @link InteractionModel::setContenu() @endlink pour un exemple de contenu.
  * @see TodoModel
  */
 class InteractionModel
