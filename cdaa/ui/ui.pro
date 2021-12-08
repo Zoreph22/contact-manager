@@ -7,14 +7,23 @@ CONFIG += \
     qtc_runnable
 
 SOURCES += \
+    contacteditwindow.cpp \
+    interactioneditwindow.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    requetewindow.cpp
 
 HEADERS += \
-    mainwindow.h
+    contacteditwindow.h \
+    interactioneditwindow.h \
+    mainwindow.h \
+    requetewindow.h
 
 FORMS += \
-    mainwindow.ui
+    contacteditwindow.ui \
+    interactioneditwindow.ui \
+    mainwindow.ui \
+    requetewindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
