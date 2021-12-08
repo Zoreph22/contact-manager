@@ -128,7 +128,7 @@ void dateUnitTests()
         struct tm tm;
         time_t n = time(0);
         tm = *localtime(&n);
-        tm.tm_hour = 2;
+        tm.tm_hour = 12;
         tm.tm_mday = 22;
         tm.tm_mon = 6;
         tm.tm_year = 100;
