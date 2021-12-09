@@ -2,8 +2,8 @@
  <author/>
  <comment/>
  <exportmacro/>
- <class>RequeteWindow</class>
- <widget class="QWidget" name="RequeteWindow">
+ <class>InteractionEditWindow</class>
+ <widget class="QWidget" name="InteractionEditWindow">
   <property name="geometry">
    <rect>
     <x>0</x>

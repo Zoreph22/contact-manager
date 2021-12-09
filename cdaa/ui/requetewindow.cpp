@@ -6,7 +6,6 @@ RequeteWindow::RequeteWindow(QWidget *parent) :
     ui(new Ui::RequeteWindow)
 {
     ui->setupUi(this);
-    ui->frameFiltresTodo->setVisible(false);
 }
 
 RequeteWindow::~RequeteWindow()
