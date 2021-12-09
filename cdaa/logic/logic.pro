@@ -1,7 +1,13 @@
+CONFIG -= \
+    qt
+
 TEMPLATE = lib
-# CONFIG += console c++11
-# CONFIG -= app_bundle
-# CONFIG -= qt
+
+DEFINES += \
+    LOGIC_LIBRARY
+
+CONFIG += \
+    c++11
 
 SOURCES += \
     contactcollection.cpp \
@@ -9,10 +15,8 @@ SOURCES += \
     date.cpp \
     interactioncollection.cpp \
     interactionmodel.cpp \
-    # main.cpp \
     todocollection.cpp \
-    todomodel.cpp \
-    unit_tests.cpp
+    todomodel.cpp
 
 HEADERS += \
     collection.h \
@@ -23,5 +27,10 @@ HEADERS += \
     interactioncollection.h \
     interactionmodel.h \
     todocollection.h \
-    todomodel.h \
-    unit_tests.h
+    todomodel.h
+
+# Default rules for deployment.
+unix {
+    target.path = /usr/lib
+}
+!isEmpty(target.path): INSTALLS += target

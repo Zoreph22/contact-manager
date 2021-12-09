@@ -2,6 +2,8 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     logic \
+    storage \
+    test_logic \
     ui
 
 CONFIG += \

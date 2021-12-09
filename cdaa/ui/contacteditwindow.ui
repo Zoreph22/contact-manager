@@ -14,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Éditer un contact</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
