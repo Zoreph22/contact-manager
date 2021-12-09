@@ -15,6 +15,15 @@ public:
     explicit ContactEditWindow(QWidget *parent = nullptr);
     ~ContactEditWindow();
 
+private slots:
+    void on_pushButton_6_clicked();
+
+    void on_pushButton_5_clicked();
+
+    void on_buttonAnnuler_clicked();
+
+    void on_buttonCreateInteraction_clicked();
+
 private:
     Ui::ContactEditWindow *ui;
 };

@@ -12,3 +12,21 @@ InteractionEditWindow::~InteractionEditWindow()
 {
     delete ui;
 }
+
+void InteractionEditWindow::on_pushButton_3_clicked()
+{
+
+}
+
+
+void InteractionEditWindow::on_buttonEnregistrer_clicked()
+{
+
+}
+
+
+void InteractionEditWindow::on_buttonAnnuler_clicked()
+{
+
+}
+

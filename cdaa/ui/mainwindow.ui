@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -82,6 +85,9 @@
                <property name="text">
                 <string/>
                </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
               </widget>
              </item>
              <item>
@@ -98,6 +104,9 @@
                <property name="text">
                 <string/>
                </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
               </widget>
              </item>
             </layout>
@@ -107,6 +116,9 @@
              <item>
               <widget class="QLineEdit" name="lineEditFilter1">
                <property name="text">
+                <string/>
+               </property>
+               <property name="placeholderText">
                 <string>Entreprise</string>
                </property>
               </widget>
@@ -114,6 +126,9 @@
              <item>
               <widget class="QLineEdit" name="lineEditFilter2">
                <property name="text">
+                <string/>
+               </property>
+               <property name="placeholderText">
                 <string>Prénom et Nom</string>
                </property>
               </widget>
@@ -232,5 +247,38 @@
   </action>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>checkBoxDateMin</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>dateEditMin</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>198</x>
+     <y>99</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>131</x>
+     <y>109</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBoxDateMax</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>dateEditMax</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>396</x>
+     <y>102</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>370</x>
+     <y>104</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

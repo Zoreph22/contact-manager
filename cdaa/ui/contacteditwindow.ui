@@ -45,6 +45,9 @@ border-radius: 6px;</string>
            <item>
             <widget class="QLineEdit" name="lineEditPrenom">
              <property name="text">
+              <string/>
+             </property>
+             <property name="placeholderText">
               <string>Prénom</string>
              </property>
             </widget>
@@ -52,6 +55,9 @@ border-radius: 6px;</string>
            <item>
             <widget class="QLineEdit" name="lineEditNom">
              <property name="text">
+              <string/>
+             </property>
+             <property name="placeholderText">
               <string>Nom</string>
              </property>
             </widget>
@@ -63,16 +69,19 @@ border-radius: 6px;</string>
            <item>
             <widget class="QLineEdit" name="lineEditEntreprise">
              <property name="text">
-              <string>Entreprise</string>
+              <string/>
              </property>
              <property name="placeholderText">
-              <string/>
+              <string>Entreprise</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QLineEdit" name="lineEditTel">
              <property name="text">
+              <string/>
+             </property>
+             <property name="placeholderText">
               <string>Téléphone</string>
              </property>
             </widget>
@@ -82,6 +91,9 @@ border-radius: 6px;</string>
          <item>
           <widget class="QLineEdit" name="lineEditEmail">
            <property name="text">
+            <string/>
+           </property>
+           <property name="placeholderText">
             <string>E-mail</string>
            </property>
           </widget>
@@ -269,7 +281,7 @@ border-radius: 6px;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_4">
+        <widget class="QPushButton" name="buttonAnnuler">
          <property name="text">
           <string>Annuler</string>
          </property>
@@ -282,5 +294,22 @@ border-radius: 6px;</string>
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>buttonAnnuler</sender>
+   <signal>clicked()</signal>
+   <receiver>ContactEditWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>301</x>
+     <y>484</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>582</x>
+     <y>570</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

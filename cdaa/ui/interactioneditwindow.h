@@ -15,6 +15,13 @@ public:
     explicit InteractionEditWindow(QWidget *parent = nullptr);
     ~InteractionEditWindow();
 
+private slots:
+    void on_pushButton_3_clicked();
+
+    void on_buttonEnregistrer_clicked();
+
+    void on_buttonAnnuler_clicked();
+
 private:
     Ui::InteractionEditWindow *ui;
 };
