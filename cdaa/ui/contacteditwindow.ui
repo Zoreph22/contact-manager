@@ -25,7 +25,7 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="ButtonPhoto">
          <property name="enabled">
           <bool>true</bool>
          </property>
@@ -43,14 +43,14 @@ border-radius: 6px;</string>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
-            <widget class="QLineEdit" name="lineEdit_2">
+            <widget class="QLineEdit" name="lineEditPrenom">
              <property name="text">
               <string>Prénom</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit">
+            <widget class="QLineEdit" name="lineEditNom">
              <property name="text">
               <string>Nom</string>
              </property>
@@ -61,7 +61,7 @@ border-radius: 6px;</string>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_3">
            <item>
-            <widget class="QLineEdit" name="lineEdit_4">
+            <widget class="QLineEdit" name="lineEditEntreprise">
              <property name="text">
               <string>Entreprise</string>
              </property>
@@ -71,7 +71,7 @@ border-radius: 6px;</string>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_3">
+            <widget class="QLineEdit" name="lineEditTel">
              <property name="text">
               <string>Téléphone</string>
              </property>
@@ -80,7 +80,7 @@ border-radius: 6px;</string>
           </layout>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_5">
+          <widget class="QLineEdit" name="lineEditEmail">
            <property name="text">
             <string>E-mail</string>
            </property>
@@ -127,7 +127,7 @@ border-radius: 6px;</string>
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_2">
+          <widget class="QPushButton" name="buttonCreateInteraction">
            <property name="text">
             <string>Créer intéraction</string>
            </property>
@@ -176,7 +176,7 @@ border-radius: 6px;</string>
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_3">
+          <widget class="QPushButton" name="buttonSupprimerTodo">
            <property name="text">
             <string>Supprimer todo</string>
            </property>
@@ -218,7 +218,7 @@ border-radius: 6px;</string>
           </spacer>
          </item>
          <item>
-          <widget class="QLabel" name="label_3">
+          <widget class="QLabel" name="labelDateCreation">
            <property name="text">
             <string>Date création : XX/XX/XXXX</string>
            </property>
@@ -242,7 +242,7 @@ border-radius: 6px;</string>
           </spacer>
          </item>
          <item>
-          <widget class="QLabel" name="label_4">
+          <widget class="QLabel" name="labelDerniereModification">
            <property name="text">
             <string>Dernière modification : XX/XX/XXXX</string>
            </property>

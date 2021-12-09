@@ -42,7 +42,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLabel" name="label_2">
+        <widget class="QLabel" name="labelDateCreation">
          <property name="text">
           <string>Date création : XX/XX/XXXX</string>
          </property>
@@ -60,14 +60,14 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="buttonEnregistrer">
          <property name="text">
           <string>Enregistrer</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="buttonAnnuler">
          <property name="text">
           <string>Annuler</string>
          </property>

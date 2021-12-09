@@ -20,14 +20,14 @@
       <item>
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>TextLabel</string>
+         <string>Liste des contacts</string>
         </property>
        </widget>
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="buttonOpenFilter">
           <property name="text">
            <string>Ouvrir les filtres</string>
           </property>
@@ -47,13 +47,101 @@
          </spacer>
         </item>
         <item>
-         <widget class="QLabel" name="label_2">
+         <widget class="QLabel" name="labelResult">
           <property name="text">
-           <string>Résultat :</string>
+           <string>Résultat : 5</string>
           </property>
          </widget>
         </item>
        </layout>
+      </item>
+      <item>
+       <widget class="QFrame" name="frameFilter">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_5">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <item>
+              <widget class="QDateEdit" name="dateEditMin"/>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBoxDateMin">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QDateEdit" name="dateEditMax"/>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBoxDateMax">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item>
+              <widget class="QLineEdit" name="lineEditFilter1">
+               <property name="text">
+                <string>Entreprise</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEditFilter2">
+               <property name="text">
+                <string>Prénom et Nom</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <item>
+              <widget class="QPushButton" name="buttonReset">
+               <property name="text">
+                <string>Reset</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="buttonFiltrer">
+               <property name="text">
+                <string>Filtrer</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
       </item>
       <item>
        <widget class="QTableWidget" name="tableWidget">
@@ -82,16 +170,16 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <widget class="QPushButton" name="pushButton_3">
+         <widget class="QPushButton" name="buttonRequest">
           <property name="text">
-           <string>PushButton</string>
+           <string>Requête</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="ButtonCreateContact">
           <property name="text">
-           <string>PushButton</string>
+           <string>Créer un contact</string>
           </property>
          </widget>
         </item>
@@ -114,9 +202,9 @@
     <property name="title">
      <string>Fichier</string>
     </property>
-    <addaction name="actionR_initialiser_tout"/>
-    <addaction name="actionExporter_en_JSON"/>
-    <addaction name="actionQuitter"/>
+    <addaction name="actionResetAll"/>
+    <addaction name="actionExportJson"/>
+    <addaction name="actionQuit"/>
    </widget>
    <widget class="QMenu" name="menuA_propos">
     <property name="title">
@@ -127,17 +215,17 @@
    <addaction name="menuA_propos"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionR_initialiser_tout">
+  <action name="actionResetAll">
    <property name="text">
     <string>Réinitialiser tout</string>
    </property>
   </action>
-  <action name="actionExporter_en_JSON">
+  <action name="actionExportJson">
    <property name="text">
     <string>Exporter en JSON</string>
    </property>
   </action>
-  <action name="actionQuitter">
+  <action name="actionQuit">
    <property name="text">
     <string>Quitter</string>
    </property>
