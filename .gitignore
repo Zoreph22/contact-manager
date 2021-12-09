@@ -1,6 +1,8 @@
 *.vpp.bak_*
-cdaa/logic/docs
-cdaa/ui/docs
+docs/logic
+docs/storage
+docs/test_logic
+docs/ui
 .vscode
 
 # Prerequisites

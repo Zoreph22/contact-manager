@@ -7,7 +7,6 @@ class STORAGE_EXPORT IDao
 {
 public:
     IDao();
-    static void test();
 };
 
 #endif // IDAO_H
