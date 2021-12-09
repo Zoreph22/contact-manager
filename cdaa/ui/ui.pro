@@ -7,21 +7,15 @@ CONFIG += \
     qtc_runnable
 
 SOURCES += \
-    contacteditwindow.cpp \
-    interactioneditwindow.cpp \
     main.cpp \
     mainwindow.cpp \
     requetewindow.cpp
 
 HEADERS += \
-    contacteditwindow.h \
-    interactioneditwindow.h \
     mainwindow.h \
     requetewindow.h
 
 FORMS += \
-    contacteditwindow.ui \
-    interactioneditwindow.ui \
     mainwindow.ui \
     requetewindow.ui
 
