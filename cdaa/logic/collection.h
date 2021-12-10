@@ -24,6 +24,8 @@ public:
 
     /// Ajouter une instance à la liste.
     void add(const T &instance);
+    /// Remplacer le contenu de la liste par le contenu d'une autre collection.
+    void replace(const Collection<T> &collection);
     /// Supprimer une instance de la liste.
     void remove(const T &instance);
     /// Vider la liste.
@@ -32,6 +34,8 @@ public:
     /* -------------------------------------------------------------------------- */
     /*                                 Opérateurs                                 */
     /* -------------------------------------------------------------------------- */
+
+    Collection<T> & operator=(const Collection<T>& collection);
 
     /// Retourne @a true si les deux collections contiennent des instances égales.
     bool operator==(const Collection<T> &collection) const;
@@ -60,7 +64,7 @@ public:
     /// Retourner le nombre d'instances dans la liste.
     unsigned int count() const;
     /// Retourner la liste.
-    const list<T> &getList() const;
+    list<T> &getList() const;
 };
 
 #include "collection_impl.h"

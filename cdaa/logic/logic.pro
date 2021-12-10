@@ -1,13 +1,10 @@
-CONFIG -= \
-    qt
+CONFIG -= qt
 
 TEMPLATE = lib
 
-DEFINES += \
-    LOGIC_LIBRARY
+DEFINES += LOGIC_LIBRARY
 
-CONFIG += \
-    c++11
+CONFIG += c++11
 
 SOURCES += \
     contactcollection.cpp \

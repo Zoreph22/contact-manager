@@ -2,6 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <contactcollection.h>
+#include <idaocontact.h>
+#include <idaogeneral.h>
+#include <idaointeraction.h>
+#include <idaotodo.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -16,7 +21,19 @@ public:
     ~MainWindow();
 
 private:
+    void init();
+    void loadData();
+
+private:
     Ui::MainWindow *ui;
+
+    IDaoContact * daoContact;
+    IDaoInteraction * daoInteraction;
+    IDaoTodo * daoTodo;
+    IDaoGeneral * daoGeneral;
+
+    ContactCollection contacts;
+
     bool isFilterOpen = false;
 
 private slots:

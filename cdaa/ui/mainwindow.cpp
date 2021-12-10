@@ -1,19 +1,73 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <daodatabase.h>
+#include <sqlitedaocontact.h>
+#include <sqlitedaogeneral.h>
+#include <sqlitedaointeraction.h>
+#include <sqlitedaotodo.h>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     ui->frameFilter->setVisible(false);
+
+    this->init();
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
+    delete this->ui;
+    delete this->daoContact;
+    delete this->daoGeneral;
+    delete this->daoInteraction;
+    delete this->daoTodo;
 }
 
+void MainWindow::init()
+{
+    DaoDatabase::openSQLite("../../database/database.db"); // TODO : changer ceci.
+
+    this->daoContact = new SQLiteDaoContact();
+    this->daoInteraction = new SQLiteDaoInteraction();
+    this->daoTodo = new SQLiteDaoTodo();
+    this->daoGeneral = new SQLiteDaoGeneral();
+
+    this->loadData();
+}
+
+void MainWindow::loadData()
+{
+    this->contacts.replace(daoContact->readAll());
+
+    for (ContactModel & contact : this->contacts.getList())
+    {
+        contact.getInteractions().replace(daoInteraction->readAll(contact.getId()));
+
+        for (InteractionModel & interaction : contact.getInteractions().getList())
+        {
+            interaction.getTodos().replace(daoTodo->readAll(interaction.getId()));
+        }
+    }
+
+    // TODO : enlever les logs ci-dessous.
+    for (ContactModel & contact : this->contacts.getList())
+    {
+        std::cout << contact << std::endl;
+
+        for (InteractionModel & interaction : contact.getInteractions().getList())
+        {
+            std::cout << interaction << std::endl;
+
+            for (TodoModel & todo : interaction.getTodos().getList())
+            {
+                std::cout << todo << std::endl;
+            }
+        }
+    }
+}
 
 void MainWindow::on_buttonOpenFilter_clicked()
 {

@@ -1,20 +1,34 @@
-QT -= \
-    gui
+QT += core sql
+
+QT -= gui
 
 TEMPLATE = lib
 
-DEFINES += \
-    STORAGE_LIBRARY
+DEFINES += STORAGE_LIBRARY
 
-CONFIG += \
-    c++11
+CONFIG += c++11
 
 SOURCES += \
-    idao.cpp
+    daodatabase.cpp \
+    idaocontact.cpp \
+    sqlitedaocontact.cpp \
+    sqlitedaogeneral.cpp \
+    sqlitedaointeraction.cpp \
+    sqlitedaotodo.cpp \
+    stdqt.cpp
 
 HEADERS += \
-    storage_global.h \
-    idao.h
+    daodatabase.h \
+    idaocontact.h \
+    idaogeneral.h \
+    idaointeraction.h \
+    idaotodo.h \
+    sqlitedaocontact.h \
+    sqlitedaogeneral.h \
+    sqlitedaointeraction.h \
+    sqlitedaotodo.h \
+    stdqt.h \
+    storage_global.h
 
 # Default rules for deployment.
 unix {

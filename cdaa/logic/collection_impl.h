@@ -11,6 +11,12 @@ void Collection<T>::add(const T &instance)
 }
 
 template<class T>
+void Collection<T>::replace(const Collection<T> &collection)
+{
+    this->liste = collection.liste;
+}
+
+template<class T>
 void Collection<T>::remove(const T &instance)
 {
     this->liste.remove(instance);
@@ -45,6 +51,13 @@ unsigned int Collection<T>::count() const
 }
 
 template<class T>
+Collection<T> &Collection<T>::operator=(const Collection<T> &collection)
+{
+    this->liste == collection.getList();
+    return *this;
+}
+
+template<class T>
 bool Collection<T>::operator==(const Collection<T> &collection) const
 {
     return this->liste == collection.getList();
@@ -57,7 +70,7 @@ bool Collection<T>::operator!=(const Collection<T> &collection) const
 }
 
 template<class T>
-const list<T> &Collection<T>::getList() const
+list<T> &Collection<T>::getList() const
 {
     return this->liste;
 }

@@ -2,7 +2,8 @@ PRAGMA foreign_keys = ON;
 
 DROP TABLE IF EXISTS General;
 CREATE TABLE General (
-  date_suppression    TEXT
+  attribut            TEXT PRIMARY KEY NOT NULL,
+  valeur              TEXT
 );
 
 DROP TABLE IF EXISTS Contact;
@@ -39,6 +40,9 @@ CREATE TABLE Todo (
   FOREIGN KEY (id_interaction) REFERENCES Interaction(id)
     ON DELETE CASCADE
 );
+
+INSERT INTO General VALUES
+  ('dateSuppression', NULL);
 
 INSERT INTO Contact(id, nom, prenom) VALUES
   (1, 'Dupont', 'Jean'),

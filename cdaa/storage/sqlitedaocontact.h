@@ -1,0 +1,21 @@
+#ifndef SQLITEDAOCONTACT_H
+#define SQLITEDAOCONTACT_H
+
+#include "storage_global.h"
+#include "idaocontact.h"
+
+#include <QtSql/QtSql>
+
+class STORAGE_EXPORT SQLiteDaoContact : public IDaoContact
+{
+public:
+    ~SQLiteDaoContact();
+
+    void create(const ContactModel &contact) const;
+    ContactCollection readAll() const;
+    void update(const ContactModel &contact) const;
+    void destroy(unsigned int id) const;
+    void destroyAll() const;
+};
+
+#endif // SQLITEDAOCONTACT_H
