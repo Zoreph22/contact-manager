@@ -29,7 +29,7 @@ void Collection<T>::clear()
 }
 
 template<class T>
-T Collection<T>::getIndex(unsigned int index) const
+T & Collection<T>::getIndex(unsigned int index) const
 {
     if (index > this->count() - 1) {
         throw out_of_range("Index en dehors de la liste");

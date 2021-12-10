@@ -60,7 +60,7 @@ public:
      * @param index Index dans la liste.
      * @throw out_of_range Index en dehors de la liste.
      */
-    T getIndex(unsigned int index) const;
+    T & getIndex(unsigned int index) const;
     /// Retourner le nombre d'instances dans la liste.
     unsigned int count() const;
     /// Retourner la liste.

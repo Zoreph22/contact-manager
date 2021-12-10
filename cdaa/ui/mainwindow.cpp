@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include <daodatabase.h>
+#include <stdqt.h>
 #include <sqlitedaocontact.h>
 #include <sqlitedaogeneral.h>
 #include <sqlitedaointeraction.h>
