@@ -12,6 +12,12 @@ void Collection<T>::add(const T &instance)
 }
 
 template<class T>
+void Collection<T>::add(const Collection<T> &collection)
+{
+    this->liste.insert(this->liste.begin(), collection.getList().begin(), collection.getList().end());
+}
+
+template<class T>
 void Collection<T>::replace(const Collection<T> &collection)
 {
     this->liste = collection.liste;

@@ -1,5 +1,15 @@
 #include "contactcollection.h"
 
+ContactModel &ContactCollection::getById(unsigned int id) const
+{
+    for (ContactModel & c : this->getList())
+    {
+        if (c.getId() == id) return c;
+    }
+
+    throw runtime_error("Contact n°" + to_string(id) + " n'existe pas dans la collection");
+}
+
 ContactCollection &ContactCollection::filterId(unsigned int id)
 {
     this->liste.remove_if([id](ContactModel & c) {
@@ -54,5 +64,29 @@ ContactCollection &ContactCollection::filterDateCreation(const Date &dateMin, co
     });
 
     return *this;
+}
+
+InteractionCollection ContactCollection::getInteractions() const
+{
+    InteractionCollection interactions;
+
+    for (ContactModel & contact : this->liste)
+    {
+        interactions.add(contact.getInteractions());
+    }
+
+    return interactions;
+}
+
+TodoCollection ContactCollection::getTodos() const
+{
+    TodoCollection todos;
+
+    for (InteractionModel & interaction : this->getInteractions().getList())
+    {
+        todos.add(interaction.getTodos());
+    }
+
+    return todos;
 }
 

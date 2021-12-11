@@ -24,6 +24,8 @@ public:
 
     /// Ajouter une instance à la liste.
     void add(const T &instance);
+    /// Ajouter à la liste le contenu d'une autre liste.
+    void add(const Collection<T> &collection);
     /// Remplacer le contenu de la liste par le contenu d'une autre collection.
     void replace(const Collection<T> &collection);
     /// Supprimer une instance de la liste.
