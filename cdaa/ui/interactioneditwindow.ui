@@ -53,7 +53,7 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <widget class="QPushButton" name="pushButton_3">
+        <widget class="QPushButton" name="buttonSupprimer">
          <property name="text">
           <string>Supprimer</string>
          </property>

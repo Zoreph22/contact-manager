@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>ContactEditWindow</class>
  <widget class="QWidget" name="ContactEditWindow">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
   <property name="enabled">
    <bool>true</bool>
   </property>
@@ -9,7 +12,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>360</width>
+    <width>364</width>
     <height>509</height>
    </rect>
   </property>
@@ -29,12 +32,29 @@
          <property name="enabled">
           <bool>true</bool>
          </property>
+         <property name="minimumSize">
+          <size>
+           <width>75</width>
+           <height>75</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>75</width>
+           <height>75</height>
+          </size>
+         </property>
          <property name="styleSheet">
-          <string notr="true">background-color: red;
-border-radius: 6px;</string>
+          <string notr="true">border: none;</string>
          </property>
          <property name="text">
-          <string>Ce bouton est une photo</string>
+          <string/>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>64</width>
+           <height>64</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -148,7 +168,22 @@ border-radius: 6px;</string>
         </layout>
        </item>
        <item>
-        <widget class="QTableWidget" name="tableWidget">
+        <widget class="QTableWidget" name="tableWidgetInteraction">
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::SingleSelection</enum>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+         <property name="showGrid">
+          <bool>false</bool>
+         </property>
+         <property name="sortingEnabled">
+          <bool>true</bool>
+         </property>
          <column>
           <property name="text">
            <string>Date interaction</string>
@@ -187,17 +222,25 @@ border-radius: 6px;</string>
            </property>
           </spacer>
          </item>
-         <item>
-          <widget class="QPushButton" name="buttonSupprimerTodo">
-           <property name="text">
-            <string>Supprimer todo</string>
-           </property>
-          </widget>
-         </item>
         </layout>
        </item>
        <item>
-        <widget class="QTableWidget" name="tableWidget_2">
+        <widget class="QTableWidget" name="tableWidgetTodos">
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::SingleSelection</enum>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+         <property name="showGrid">
+          <bool>false</bool>
+         </property>
+         <property name="sortingEnabled">
+          <bool>true</bool>
+         </property>
          <column>
           <property name="text">
            <string>Date de réalisation</string>
@@ -294,22 +337,5 @@ border-radius: 6px;</string>
   </layout>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonAnnuler</sender>
-   <signal>clicked()</signal>
-   <receiver>ContactEditWindow</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>301</x>
-     <y>484</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>582</x>
-     <y>570</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
