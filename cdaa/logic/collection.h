@@ -13,7 +13,7 @@ template<class T>
  */
 class Collection
 {
-private:
+protected:
     /// Liste des instances.
     mutable list<T> liste;
 
@@ -65,6 +65,9 @@ public:
     unsigned int count() const;
     /// Retourner la liste.
     list<T> &getList() const;
+
+protected:
+    static bool findStrings(string string1, string string2);
 };
 
 #include "collection_impl.h"
