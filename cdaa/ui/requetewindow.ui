@@ -42,7 +42,7 @@
             <item>
              <widget class="QRadioButton" name="radioInteractions">
               <property name="text">
-               <string>Interactions</string>
+               <string>&amp;Interactions</string>
               </property>
               <property name="checked">
                <bool>true</bool>
@@ -52,14 +52,14 @@
             <item>
              <widget class="QRadioButton" name="radioTodos">
               <property name="text">
-               <string>Todos</string>
+               <string>&amp;Todos</string>
               </property>
              </widget>
             </item>
             <item>
              <widget class="QRadioButton" name="radioDatesTodo">
               <property name="text">
-               <string>Dates de todo</string>
+               <string>&amp;Dates de todo</string>
               </property>
              </widget>
             </item>
@@ -284,14 +284,14 @@ p, li { white-space: pre-wrap; }
        <item>
         <widget class="QPushButton" name="buttonRechercher">
          <property name="text">
-          <string>Rechercher</string>
+          <string>&amp;Rechercher</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="buttonFermer">
          <property name="text">
-          <string>Fermer</string>
+          <string>&amp;Fermer</string>
          </property>
         </widget>
        </item>

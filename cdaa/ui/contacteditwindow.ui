@@ -44,6 +44,9 @@
            <height>75</height>
           </size>
          </property>
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cliquez pour changer l'image.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
          <property name="styleSheet">
           <string notr="true">border: none;</string>
          </property>
@@ -173,7 +176,7 @@
          <item>
           <widget class="QPushButton" name="buttonCreateInteraction">
            <property name="text">
-            <string>Créer interaction</string>
+            <string>&amp;Créer interaction</string>
            </property>
           </widget>
          </item>
@@ -357,21 +360,21 @@
        <item>
         <widget class="QPushButton" name="pushButton_6">
          <property name="text">
-          <string>Supprimer</string>
+          <string>&amp;Supprimer</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="pushButton_5">
          <property name="text">
-          <string>Enregistrer</string>
+          <string>&amp;Enregistrer</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="buttonAnnuler">
          <property name="text">
-          <string>Annuler</string>
+          <string>&amp;Annuler</string>
          </property>
         </widget>
        </item>
