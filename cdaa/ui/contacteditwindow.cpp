@@ -215,4 +215,3 @@ void ContactEditWindow::on_ButtonPhoto_clicked()
 
     cm.setPhoto(StdQt::string(destinationFile));
 }
-
