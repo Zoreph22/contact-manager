@@ -13,7 +13,7 @@ template<class T>
  */
 class Collection
 {
-private:
+protected:
     /// Liste des instances.
     mutable list<T> liste;
 
@@ -24,6 +24,8 @@ public:
 
     /// Ajouter une instance à la liste.
     void add(const T &instance);
+    /// Ajouter à la liste le contenu d'une autre liste.
+    void add(const Collection<T> &collection);
     /// Remplacer le contenu de la liste par le contenu d'une autre collection.
     void replace(const Collection<T> &collection);
     /// Supprimer une instance de la liste.
@@ -65,6 +67,9 @@ public:
     unsigned int count() const;
     /// Retourner la liste.
     list<T> &getList() const;
+
+protected:
+    static bool findStrings(string string1, string string2);
 };
 
 #include "collection_impl.h"

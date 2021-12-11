@@ -1,13 +1,20 @@
 #ifndef COLLECTION_IMPL_H
 #define COLLECTION_IMPL_H
 
-#include <stdexcept>
+#include <algorithm>
+
 #include "collection.h"
 
 template<class T>
 void Collection<T>::add(const T &instance)
 {
     this->liste.push_back(instance);
+}
+
+template<class T>
+void Collection<T>::add(const Collection<T> &collection)
+{
+    this->liste.insert(this->liste.begin(), collection.getList().begin(), collection.getList().end());
 }
 
 template<class T>
@@ -73,6 +80,15 @@ template<class T>
 list<T> &Collection<T>::getList() const
 {
     return this->liste;
+}
+
+template<class T>
+bool Collection<T>::findStrings(string string1, string string2)
+{
+    transform(string1.begin(), string1.end(), string1.begin(), ::tolower);
+    transform(string2.begin(), string2.end(), string2.begin(), ::tolower);
+
+    return string1.find(string2) != string::npos;
 }
 
 #endif // COLLECTION_IMPL_H
