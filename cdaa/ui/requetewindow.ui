@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>RequeteWindow</class>
- <widget class="QWidget" name="RequeteWindow">
+ <widget class="QDialog" name="RequeteWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>452</width>
-    <height>564</height>
+    <width>450</width>
+    <height>565</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Effectuer une requête</string>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -81,16 +84,6 @@
             <property name="insertPolicy">
              <enum>QComboBox::NoInsert</enum>
             </property>
-            <item>
-             <property name="text">
-              <string>Tous</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Bibi</string>
-             </property>
-            </item>
            </widget>
           </item>
          </layout>
@@ -146,6 +139,9 @@
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
+                 <property name="toolTip">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Si désactivé, alors seules les interactions dont la date est inférieure à la date maximale spécifiée seront extraites.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
                  <property name="text">
                   <string/>
                  </property>
@@ -156,6 +152,9 @@
                </item>
                <item row="1" column="1">
                 <widget class="QCheckBox" name="checkBoxInteractionDateMax">
+                 <property name="toolTip">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Si désactivé, alors seules les interactions dont la date est supérieure à la date minimale spécifiée seront extraites.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
                  <property name="text">
                   <string/>
                  </property>
@@ -216,6 +215,9 @@
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
+                 <property name="toolTip">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Si désactivé, alors seuls les todos dont la date est inférieure à la date maximale spécifiée seront extraits.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
                  <property name="text">
                   <string/>
                  </property>
@@ -226,6 +228,9 @@
                </item>
                <item row="1" column="1">
                 <widget class="QCheckBox" name="checkBoxTodoDateMax">
+                 <property name="toolTip">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Si désactivé, alors seuls les todos dont la date est supérieure à la date minimale spécifiée seront extraits.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
                  <property name="text">
                   <string/>
                  </property>

@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>423</width>
-    <height>600</height>
+    <height>512</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,7 +32,7 @@
         <item>
          <widget class="QPushButton" name="buttonOpenFilter">
           <property name="text">
-           <string>Ouvrir les filtres</string>
+           <string>&amp;Ouvrir les filtres</string>
           </property>
          </widget>
         </item>
@@ -52,7 +52,7 @@
         <item>
          <widget class="QLabel" name="labelResult">
           <property name="text">
-           <string>Résultat : 5</string>
+           <string>Résultat(s) : 5</string>
           </property>
          </widget>
         </item>
@@ -68,11 +68,43 @@
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_5">
          <item>
+          <widget class="Line" name="line">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
           <layout class="QVBoxLayout" name="verticalLayout_4">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_7">
+             <item>
+              <widget class="QLabel" name="label_3">
+               <property name="text">
+                <string>Date de création min. :</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_2">
+               <property name="text">
+                <string>Date de création max. :</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_5">
              <item>
-              <widget class="QDateEdit" name="dateEditMin"/>
+              <widget class="QDateEdit" name="dateEditMin">
+               <property name="toolTip">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Date de création minimale.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
+               <property name="calendarPopup">
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
              <item>
               <widget class="QCheckBox" name="checkBoxDateMin">
@@ -81,6 +113,9 @@
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="toolTip">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Si désactivé, alors seuls les contacts dont la date de création est inférieure à la date maximale spécifiée seront recherchés.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
                <property name="text">
                 <string/>
@@ -91,7 +126,14 @@
               </widget>
              </item>
              <item>
-              <widget class="QDateEdit" name="dateEditMax"/>
+              <widget class="QDateEdit" name="dateEditMax">
+               <property name="toolTip">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Date de création maximale.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
+               <property name="calendarPopup">
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
              <item>
               <widget class="QCheckBox" name="checkBoxDateMax">
@@ -100,6 +142,9 @@
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="toolTip">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Si désactivé, alors seuls les contacts dont la date de création est supérieure à la date minimale spécifiée seront recherchés.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
                <property name="text">
                 <string/>
@@ -114,6 +159,29 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_3">
              <item>
+              <widget class="QLineEdit" name="lineEditFilter2">
+               <property name="text">
+                <string/>
+               </property>
+               <property name="placeholderText">
+                <string>Prénom</string>
+               </property>
+               <property name="clearButtonEnabled">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEditFilter3">
+               <property name="placeholderText">
+                <string>Nom</string>
+               </property>
+               <property name="clearButtonEnabled">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
               <widget class="QLineEdit" name="lineEditFilter1">
                <property name="text">
                 <string/>
@@ -121,15 +189,8 @@
                <property name="placeholderText">
                 <string>Entreprise</string>
                </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="lineEditFilter2">
-               <property name="text">
-                <string/>
-               </property>
-               <property name="placeholderText">
-                <string>Prénom et Nom</string>
+               <property name="clearButtonEnabled">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
@@ -140,14 +201,14 @@
              <item>
               <widget class="QPushButton" name="buttonReset">
                <property name="text">
-                <string>Reset</string>
+                <string>Ré&amp;initialiser</string>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QPushButton" name="buttonFiltrer">
                <property name="text">
-                <string>Filtrer</string>
+                <string>R&amp;echercher</string>
                </property>
               </widget>
              </item>
@@ -178,6 +239,18 @@
         <property name="sortingEnabled">
          <bool>true</bool>
         </property>
+        <property name="cornerButtonEnabled">
+         <bool>false</bool>
+        </property>
+        <attribute name="horizontalHeaderHighlightSections">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="horizontalHeaderStretchLastSection">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
         <column>
          <property name="text">
           <string>Prénom</string>
@@ -205,14 +278,14 @@
         <item>
          <widget class="QPushButton" name="buttonRequest">
           <property name="text">
-           <string>Requête</string>
+           <string>&amp;Requête</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="ButtonCreateContact">
           <property name="text">
-           <string>Créer un contact</string>
+           <string>&amp;Créer un contact</string>
           </property>
          </widget>
         </item>
@@ -254,13 +327,7 @@
     <addaction name="actionExportJson"/>
     <addaction name="actionQuit"/>
    </widget>
-   <widget class="QMenu" name="menuA_propos">
-    <property name="title">
-     <string>&amp;A propos</string>
-    </property>
-   </widget>
    <addaction name="menuFichier"/>
-   <addaction name="menuA_propos"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionResetAll">

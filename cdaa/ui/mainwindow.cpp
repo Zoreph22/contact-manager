@@ -16,8 +16,10 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
-    ui->frameFilter->setVisible(false);
+    this->ui->setupUi(this);
+    this->ui->frameFilter->setVisible(false);
+    this->ui->dateEditMin->setDate(QDate::currentDate());
+    this->ui->dateEditMax->setDate(QDate::currentDate());
 
     this->init();
     this->refreshTable();
@@ -89,7 +91,7 @@ void MainWindow::refreshTable()
 
     QString s;
     s.setNum(nbC);
-    this->ui->labelResult->setText("Résultat : " + s);
+    this->ui->labelResult->setText("Résultat(s) : " + s);
 
     for(unsigned int i=0;i<nbC;i++){
         ContactModel & c = this->contacts.getIndex(i);

@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>InteractionEditWindow</class>
- <widget class="QWidget" name="InteractionEditWindow">
+ <widget class="QDialog" name="InteractionEditWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>307</width>
-    <height>225</height>
+    <width>310</width>
+    <height>255</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Éditer une interaction</string>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
@@ -19,12 +22,25 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Contenu de l'intéraction</string>
+        <string>Contenu de l'interaction</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QTextEdit" name="textEdit"/>
+      <widget class="QTextEdit" name="textEdit">
+       <property name="acceptRichText">
+        <bool>false</bool>
+       </property>
+       <property name="placeholderText">
+        <string>Saisir la description de l'interaction...
+		
+Chaque ligne peut contenir un &quot;@todo Description todo&quot; suivi optionnellement par un &quot;@date XX/XX/XXXX&quot; pour la date de réalisation. Si aucune date n'est spécifiée, alors le todo prend la date du jour.
+
+Exemples :
+@todo Faire le rapport @date 01/01/2021
+@todo Faire les devoirs</string>
+       </property>
+      </widget>
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">

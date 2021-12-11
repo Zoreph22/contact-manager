@@ -13,8 +13,9 @@ ContactEditWindow::ContactEditWindow(ContactModel &cm, bool isEdit, QWidget *par
     cm(cm),
     isEdit(isEdit)
 {
+    this->setWindowFlags(Qt::Window);
+    this->ui->setupUi(this);
     this->init();
-    ui->setupUi(this);
     this->refreshInteractionAndTodosTable();
 
     ui->pushButton_5->setDisabled(cm.getNom().empty() || cm.getPrenom().empty());

@@ -8,8 +8,14 @@ RequeteWindow::RequeteWindow(const ContactCollection & contacts, QWidget *parent
     ui(new Ui::RequeteWindow),
     contacts(contacts)
 {
-    ui->setupUi(this);
-    ui->frameFiltresTodo->setVisible(false);
+    this->setWindowFlags(Qt::Window);
+    this->ui->setupUi(this);
+    this->ui->frameFiltresTodo->setVisible(false);
+    this->ui->dateEditInteractionMin->setDate(QDate::currentDate());
+    this->ui->dateEditInteractionMax->setDate(QDate::currentDate());
+    this->ui->dateEditTodoMin->setDate(QDate::currentDate());
+    this->ui->dateEditTodoMax->setDate(QDate::currentDate());
+
     this->refreshComboBox();
 }
 
@@ -26,7 +32,9 @@ void RequeteWindow::refreshComboBox()
 
     for (const ContactModel & c : this->contacts.getList())
     {
-        QString nom(StdQt::string(c.getPrenom() + " | " + c.getNom() + " | " + c.getEntreprise()));
+        QString nom = QString::fromStdString(c.getPrenom() + " " + c.getNom());
+        if (!c.getEntreprise().empty()) nom += QString::fromStdString(" - " + c.getEntreprise());
+
         QVariant contactId(c.getId());
 
         this->ui->comboBoxContact->addItem(nom, contactId);
@@ -41,6 +49,7 @@ void RequeteWindow::refreshResults()
     {
         case Sujet::Interactions:   ss << this->filteredInteractions; break;
         case Sujet::Todos:          ss << this->filteredTodos; break;
+        case Sujet::DatesTodo:      ss << this->filteredTodos.getDates(); break;
     }
 
     this->ui->textEditResultats->setText(StdQt::string(ss.str()));
@@ -82,6 +91,7 @@ void RequeteWindow::on_buttonRechercher_clicked()
     {
         case Sujet::Interactions:   this->queryInteractions(); break;
         case Sujet::Todos:          this->queryTodos(); break;
+        case Sujet::DatesTodo:      this->queryTodos(); break;
     }
 
     this->refreshResults();

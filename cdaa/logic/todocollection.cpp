@@ -40,3 +40,15 @@ TodoCollection &TodoCollection::filterDateRealisation(const Date &dateMin, const
 
     return *this;
 }
+
+Collection<Date> TodoCollection::getDates() const
+{
+    Collection<Date> dates;
+
+    for (TodoModel & todo : this->liste)
+    {
+        dates.add(todo.getDateTodo());
+    }
+
+    return dates;
+}

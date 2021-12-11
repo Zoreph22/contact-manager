@@ -15,6 +15,7 @@ public:
     TodoCollection &filterId(unsigned int id);
     TodoCollection &filterDateRealisation(const Date & date);
     TodoCollection &filterDateRealisation(const Date & dateMin, const Date & dateMax);
+    Collection<Date> getDates() const;
 };
 
 #endif // TODOCOLLECTION_H

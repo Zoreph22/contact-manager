@@ -12,13 +12,14 @@ InteractionEditWindow::InteractionEditWindow(InteractionModel &im, bool isEdit,Q
     im(im),
     isEdit(isEdit)
 {
-    ui->setupUi(this);
+    this->setWindowFlags(Qt::Window);
+    this->ui->setupUi(this);
 
     if(!isEdit){
         this->ui->buttonSupprimer->setVisible(false);
     }
 
-    this->ui->textEdit->setText(StdQt::string(im.getContenu()));
+    this->ui->textEdit->setText(StdQt::string(isEdit ? im.getContenu() : ""));
 
     this->ui->labelDateCreation->setText("Date de création : " + StdQt::string(im.getDateInteraction().toString()));
 }
@@ -48,7 +49,7 @@ void InteractionEditWindow::on_buttonAnnuler_clicked()
 
 void InteractionEditWindow::on_buttonSupprimer_clicked()
 {
-    QMessageBox::StandardButton button = QMessageBox::question(this, "Question", "Voulez-vous vraiment supprimer cette intéraction ?");
+    QMessageBox::StandardButton button = QMessageBox::question(this, "Question", "Voulez-vous vraiment supprimer cette interaction ?");
     if(QMessageBox::Yes == button)
         this->done(2);
 }
