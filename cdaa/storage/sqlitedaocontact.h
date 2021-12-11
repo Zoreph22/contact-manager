@@ -11,6 +11,8 @@ class STORAGE_EXPORT SQLiteDaoContact : public IDaoContact
 public:
     ~SQLiteDaoContact();
 
+    unsigned int readMaxId() const;
+
     void create(const ContactModel &contact) const;
     ContactCollection readAll() const;
     void update(const ContactModel &contact) const;

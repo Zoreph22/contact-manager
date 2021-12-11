@@ -11,6 +11,8 @@ class STORAGE_EXPORT IDaoContact
 public:
     virtual ~IDaoContact() {};
 
+    virtual unsigned int readMaxId() const = 0;
+
     virtual void create(const ContactModel & contact) const = 0;
     virtual ContactCollection readAll() const = 0;
     virtual void update(const ContactModel & contact) const = 0;

@@ -41,6 +41,11 @@ void MainWindow::init()
 
 void MainWindow::loadData()
 {
+    ContactModel::idCount = this->daoContact->readMaxId();
+    InteractionModel::idCount = this->daoInteraction->readMaxId();
+    TodoModel::idCount = this->daoTodo->readMaxId();
+    qDebug() << ContactModel::idCount << InteractionModel::idCount << TodoModel::idCount;
+
     this->contacts.replace(daoContact->readAll());
 
     for (ContactModel & contact : this->contacts.getList())
@@ -52,6 +57,8 @@ void MainWindow::loadData()
             interaction.getTodos().replace(daoTodo->readAll(interaction.getId()));
         }
     }
+
+    //this->contacts.filterNom("Dupont");
 
     // TODO : enlever les logs ci-dessous.
     for (ContactModel & contact : this->contacts.getList())

@@ -11,6 +11,8 @@ class STORAGE_EXPORT SQLiteDaoTodo : public IDaoTodo
 public:
     ~SQLiteDaoTodo();
 
+    unsigned int readMaxId() const;
+
     void create(unsigned int interactionId, const TodoModel &todo) const;
     TodoCollection readAll(unsigned int interactionId) const;
     void update(const TodoModel &todo) const;

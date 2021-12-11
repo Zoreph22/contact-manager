@@ -11,6 +11,8 @@ class STORAGE_EXPORT SQLiteDaoInteraction : public IDaoInteraction
 public:
     ~SQLiteDaoInteraction();
 
+    unsigned int readMaxId() const;
+
     void create(unsigned int contactId, const InteractionModel &interaction) const;
     InteractionCollection readAll(unsigned int contactId) const;
     void update(const InteractionModel &interaction) const;

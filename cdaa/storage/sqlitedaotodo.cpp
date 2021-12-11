@@ -7,6 +7,27 @@ SQLiteDaoTodo::~SQLiteDaoTodo()
 
 }
 
+unsigned int SQLiteDaoTodo::readMaxId() const
+{
+    QSqlQuery query("SELECT MAX(id) FROM Todo");
+
+    if (!query.exec())
+    {
+        throw std::runtime_error("Impossible de récupérer l'identifiant maximal des todos dans la base de données : " + query.lastError().text().toStdString());
+    }
+
+    query.next();
+
+    unsigned int maxId = 0;
+
+    if (query.value(0).canConvert<unsigned int>())
+    {
+        maxId = query.value(0).toUInt();
+    }
+
+    return maxId + 1;
+}
+
 void SQLiteDaoTodo::create(unsigned int interactionId, const TodoModel &todo) const
 {
     QSqlQuery query;
