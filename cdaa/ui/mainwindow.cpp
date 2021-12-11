@@ -1,3 +1,4 @@
+#include "contacteditwindow.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -7,6 +8,8 @@
 #include <sqlitedaogeneral.h>
 #include <sqlitedaointeraction.h>
 #include <sqlitedaotodo.h>
+#include <QMessageBox>
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -16,6 +19,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->frameFilter->setVisible(false);
 
     this->init();
+    this->refreshTable();
+
+    connect(this->ui->tableWidget, SIGNAL(itemDoubleClicked(QTableWidgetItem*)), this, SLOT(on_itemDoubleClicked(QTableWidgetItem*)));
 }
 
 MainWindow::~MainWindow()
@@ -77,6 +83,71 @@ void MainWindow::loadData()
     }
 }
 
+void MainWindow::refreshTable()
+{
+    this->ui->tableWidget->setRowCount(0);
+    unsigned int nbC = this->contacts.count();
+
+    QString s;
+    s.setNum(nbC);
+    this->ui->labelResult->setText("Résultat : " + s);
+
+    for(unsigned int i=0;i<nbC;i++){
+        ContactModel & c = this->contacts.getIndex(i);
+
+        QTableWidgetItem * prenom = new QTableWidgetItem(StdQt::string(c.getPrenom()));
+        prenom->setData(Qt::UserRole, QVariant(i));
+
+        QTableWidgetItem * nom = new QTableWidgetItem(StdQt::string(c.getNom()));
+        nom->setData(Qt::UserRole, QVariant(i));
+
+        QTableWidgetItem * entreprise = new QTableWidgetItem(StdQt::string(c.getEntreprise()));
+        entreprise->setData(Qt::UserRole, QVariant(i));
+
+        QTableWidgetItem * datecreation = new QTableWidgetItem(StdQt::string(c.getDateCreation().toString()));
+        datecreation->setData(Qt::UserRole, QVariant(i));
+
+        this->ui->tableWidget->insertRow(i);
+
+        this->ui->tableWidget->setItem(i, 0, prenom);
+        this->ui->tableWidget->setItem(i, 1, nom);
+        this->ui->tableWidget->setItem(i, 2, entreprise);
+        this->ui->tableWidget->setItem(i, 3, datecreation);
+    }
+}
+
+void MainWindow::on_itemDoubleClicked(QTableWidgetItem *item)
+{
+    unsigned int idContact = item->data(Qt::UserRole).toUInt();
+    ContactModel & original = this->contacts.getIndex(idContact);
+    ContactModel nouveau = original;
+    ContactEditWindow editC(nouveau, true);
+    int ret = editC.exec();
+    if(ret == 2)
+    {
+        try {
+            daoContact->destroy(original.getId());
+            contacts.remove(original);
+            refreshTable();
+        }  catch (std::runtime_error & e) {
+            QMessageBox::critical(this, "Erreur", e.what());
+        }
+
+    }
+
+    if(ret == 1)
+    {
+        try {
+            daoContact->update(nouveau);
+            original = nouveau;
+            refreshTable();
+        }  catch (std::runtime_error & e) {
+            QMessageBox::critical(this, "Erreur", e.what());
+        }
+    }
+}
+
+
 void MainWindow::on_buttonOpenFilter_clicked()
 {
     if(isFilterOpen){
@@ -98,13 +169,23 @@ void MainWindow::on_actionQuit_triggered()
 
 void MainWindow::on_actionExportJson_triggered()
 {
-
+    QString chemin = QFileDialog::getSaveFileName(this, QString(), QString(), "JSON (*.json)");
+    qDebug() << chemin;
 }
 
 
 void MainWindow::on_actionResetAll_triggered()
 {
-
+    QMessageBox::StandardButton button = QMessageBox::question(this, "Question", "Voulez-vous vraiment réinitialiser toutes les données ?");
+    if(QMessageBox::Yes == button){
+        try{
+            daoContact->destroyAll();
+            contacts.clear();
+            refreshTable();
+        }  catch (std::runtime_error & e) {
+            QMessageBox::critical(this, "Erreur", e.what());
+        }
+    }
 }
 
 
@@ -128,7 +209,18 @@ void MainWindow::on_buttonRequest_clicked()
 
 void MainWindow::on_ButtonCreateContact_clicked()
 {
-
+    ContactModel c;
+    ContactEditWindow editC(c, false);
+    int ret = editC.exec();
+    if(ret == 1){
+        try {
+            daoContact->create(c);
+            contacts.add(c);
+            refreshTable();
+        }  catch (std::runtime_error & e) {
+            QMessageBox::critical(this, "Erreur", e.what());
+        }
+    }
 }
 
 
@@ -136,4 +228,5 @@ void MainWindow::on_dateEditMin_userDateChanged(const QDate &date)
 {
 
 }
+
 

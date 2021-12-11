@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTableWidgetItem>
 #include <contactcollection.h>
 #include <idaocontact.h>
 #include <idaogeneral.h>
@@ -23,6 +24,7 @@ public:
 private:
     void init();
     void loadData();
+    void refreshTable();
 
 private:
     Ui::MainWindow *ui;
@@ -46,5 +48,7 @@ private slots:
     void on_ButtonCreateContact_clicked();
     void on_buttonOpenFilter_clicked();
     void on_dateEditMin_userDateChanged(const QDate &date);
+
+    void on_itemDoubleClicked(QTableWidgetItem*item);
 };
 #endif // MAINWINDOW_H

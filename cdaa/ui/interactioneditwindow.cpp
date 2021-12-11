@@ -1,11 +1,26 @@
 #include "interactioneditwindow.h"
 #include "ui_interactioneditwindow.h"
+#include "stdqt.h"
+#include <QMessageBox>
+#include <QDebug>
 
-InteractionEditWindow::InteractionEditWindow(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::InteractionEditWindow)
+#include <interactionmodel.h>
+
+InteractionEditWindow::InteractionEditWindow(InteractionModel &im, bool isEdit,QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::InteractionEditWindow),
+    im(im),
+    isEdit(isEdit)
 {
     ui->setupUi(this);
+
+    if(!isEdit){
+        this->ui->buttonSupprimer->setVisible(false);
+    }
+
+    this->ui->textEdit->setText(StdQt::string(im.getContenu()));
+
+    this->ui->labelDateCreation->setText("Date de création : " + StdQt::string(im.getDateInteraction().toString()));
 }
 
 InteractionEditWindow::~InteractionEditWindow()
@@ -13,20 +28,28 @@ InteractionEditWindow::~InteractionEditWindow()
     delete ui;
 }
 
-void InteractionEditWindow::on_pushButton_3_clicked()
-{
-
-}
-
-
 void InteractionEditWindow::on_buttonEnregistrer_clicked()
 {
-
+    try {
+        im.setContenu(StdQt::string(this->ui->textEdit->toPlainText()));
+        im.parseTodos();
+        this->done(1);
+    }  catch (std::exception & e) {
+        QMessageBox::warning(this, "Avertissement", e.what());
+    }
 }
 
 
 void InteractionEditWindow::on_buttonAnnuler_clicked()
 {
+    this->done(0);
+}
 
+
+void InteractionEditWindow::on_buttonSupprimer_clicked()
+{
+    QMessageBox::StandardButton button = QMessageBox::question(this, "Question", "Voulez-vous vraiment supprimer cette intéraction ?");
+    if(QMessageBox::Yes == button)
+        this->done(2);
 }
 
