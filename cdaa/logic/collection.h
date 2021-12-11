@@ -47,7 +47,7 @@ public:
     friend ostream &operator<<(ostream &out, const Collection<T> &collection) {
         for (auto & it : collection.getList()) {
             out << it << endl
-                << "------------------" << endl;
+                << "--------------------------------" << endl;
         }
 
         return out;

@@ -43,9 +43,8 @@ bool TodoModel::operator!=(const TodoModel &todo) const
 
 ostream &operator<<(ostream &out, const TodoModel &todo)
 {
-    return out << "(" << todo.id << ")"
-               << " Date : " << todo.dateTodo
-               << " Résumé : " << todo.resume;
+    return out << "(Todo n°" << todo.id << ")"
+               << " Date de réalisation : " << todo.dateTodo << " - Résumé : " << todo.resume;
 }
 
 unsigned int TodoModel::getId() const

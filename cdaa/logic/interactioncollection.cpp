@@ -12,6 +12,8 @@ InteractionModel &InteractionCollection::getById(unsigned int id) const
 
 InteractionCollection &InteractionCollection::filterId(unsigned int id)
 {
+    if (!id) return *this;
+
     this->liste.remove_if([id](InteractionModel & i) {
         return !(i.getId() == id);
     });
@@ -43,7 +45,7 @@ TodoCollection InteractionCollection::getTodos() const
 {
     TodoCollection todos;
 
-    for (InteractionModel & interaction : this->getList())
+    for (InteractionModel & interaction : this->liste)
     {
         todos.add(interaction.getTodos());
     }

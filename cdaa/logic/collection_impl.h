@@ -60,7 +60,7 @@ unsigned int Collection<T>::count() const
 template<class T>
 Collection<T> &Collection<T>::operator=(const Collection<T> &collection)
 {
-    this->liste == collection.getList();
+    this->liste = collection.liste;
     return *this;
 }
 

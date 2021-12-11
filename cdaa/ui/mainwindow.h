@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "requetewindow.h"
+
 #include <QMainWindow>
 #include <contactcollection.h>
 #include <idaocontact.h>

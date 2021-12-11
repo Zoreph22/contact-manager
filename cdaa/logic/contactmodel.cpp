@@ -77,12 +77,12 @@ bool ContactModel::operator!=(const ContactModel &contact) const
 ostream &operator<<(ostream &out, const ContactModel &contact)
 {
     return out
-           << "(" << contact.id << ")"
+           << "(Contact n°" << contact.id << ")"
            << " Prénom/nom : " << contact.prenom << " " << contact.nom << endl
            << "Entreprise : " << contact.entreprise << endl
            << "E-mail : " << contact.email << " Téléphone : " << contact.tel << endl
            << "Photo : " << contact.photo << endl
-           << "Création : " << contact.dateCreation << " Modification : " << contact.dateModification << endl;
+           << "Création : " << contact.dateCreation << " Modification : " << contact.dateModification;
 }
 
 unsigned int ContactModel::getId() const

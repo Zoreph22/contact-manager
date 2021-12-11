@@ -12,6 +12,8 @@ ContactModel &ContactCollection::getById(unsigned int id) const
 
 ContactCollection &ContactCollection::filterId(unsigned int id)
 {
+    if (!id) return *this;
+
     this->liste.remove_if([id](ContactModel & c) {
         return !(c.getId() == id);
     });
@@ -82,9 +84,12 @@ TodoCollection ContactCollection::getTodos() const
 {
     TodoCollection todos;
 
-    for (InteractionModel & interaction : this->getInteractions().getList())
+    for (ContactModel & contact : this->liste)
     {
-        todos.add(interaction.getTodos());
+        for (InteractionModel & interaction : contact.getInteractions().getList())
+        {
+            todos.add(interaction.getTodos());
+        }
     }
 
     return todos;

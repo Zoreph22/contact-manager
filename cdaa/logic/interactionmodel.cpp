@@ -69,9 +69,9 @@ bool InteractionModel::operator==(const InteractionModel &interaction) const
 
 ostream &operator<<(ostream &out, const InteractionModel &interaction)
 {
-    return out << "(" << interaction.id << ")" << " Date : " << interaction.dateInteraction << " Interactions : " << interaction.todos.count() << endl
+    return out << "(Interaction n°" << interaction.id << ")" << " Date : " << interaction.dateInteraction << " - Nombre de todos : " << interaction.todos.count() << endl
                << "Contenu :" << endl
-               << "'" << interaction.contenu << "'" << endl;
+               << "'" << interaction.contenu << "'";
 }
 
 bool InteractionModel::operator!=(const InteractionModel &interaction) const

@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "requetewindow.h"
 #include "ui_mainwindow.h"
 
 #include <daodatabase.h>
@@ -21,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete this->ui;
+
     delete this->daoContact;
     delete this->daoGeneral;
     delete this->daoInteraction;
@@ -44,7 +46,6 @@ void MainWindow::loadData()
     ContactModel::idCount = this->daoContact->readMaxId();
     InteractionModel::idCount = this->daoInteraction->readMaxId();
     TodoModel::idCount = this->daoTodo->readMaxId();
-    qDebug() << ContactModel::idCount << InteractionModel::idCount << TodoModel::idCount;
 
     this->contacts.replace(daoContact->readAll());
 
@@ -57,8 +58,6 @@ void MainWindow::loadData()
             interaction.getTodos().replace(daoTodo->readAll(interaction.getId()));
         }
     }
-
-    //this->contacts.filterNom("Dupont");
 
     // TODO : enlever les logs ci-dessous.
     for (ContactModel & contact : this->contacts.getList())
@@ -122,7 +121,8 @@ void MainWindow::on_buttonFiltrer_clicked()
 
 void MainWindow::on_buttonRequest_clicked()
 {
-
+    RequeteWindow win(this->contacts);
+    win.exec();
 }
 
 

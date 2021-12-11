@@ -12,6 +12,8 @@ TodoModel &TodoCollection::getById(unsigned int id) const
 
 TodoCollection &TodoCollection::filterId(unsigned int id)
 {
+    if (!id) return *this;
+
     this->liste.remove_if([id](TodoModel & t) {
         return !(t.getId() == id);
     });
