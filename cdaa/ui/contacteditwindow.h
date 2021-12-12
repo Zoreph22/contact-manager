@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <contactmodel.h>
 #include <idaointeraction.h>
+#include <idaotodo.h>
 #include <qtablewidget.h>
 
 namespace Ui {
@@ -35,6 +36,7 @@ private:
     Ui::ContactEditWindow *ui;
     ContactModel &cm;
     IDaoInteraction * daoInteraction;
+    IDaoTodo * daoTodo;
     bool isEdit = true;
 
     void refreshInteractionAndTodosTable();

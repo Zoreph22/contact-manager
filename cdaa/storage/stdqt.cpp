@@ -23,7 +23,7 @@ std::string StdQt::string(const QString &qString)
 
 QDate StdQt::date(const Date &stdDate)
 {
-    return QDate::fromString(QString::fromStdString(stdDate.toString()), "dd/M/yyyy");
+    return QDate::fromString(QString::fromStdString(stdDate.toString()), "d/M/yyyy");
 }
 
 Date StdQt::date(const QVariant &qVariant)
