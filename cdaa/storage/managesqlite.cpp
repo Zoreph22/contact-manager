@@ -138,21 +138,24 @@ void ManageSQLite::insertMockData() const
         Date date; date.setNow();
         InteractionModel i(1, date, "Descriptif interaction 1\n@todo Faire les courses");
         daoI.create(1, i);
-
-        i.parseTodos();
-
-        for (TodoModel & t : i.getTodos().getList())
-            daoT.create(1, t);
     }
 
     {
         Date date(23, 1, 2020);
         InteractionModel i(2, date, "Descriptif interaction 2\n@todo Faire les devoirs @date 25/01/2020");
         daoI.create(2, i);
+    }
 
-        i.parseTodos();
+    // Todos.
+    {
+        Date date; date.setNow();
+        TodoModel i(1, date, "Faire les courses");
+        daoT.create(1, i);
+    }
 
-        for (TodoModel & t : i.getTodos().getList())
-            daoT.create(2, t);
+    {
+        Date date(25, 1, 2020);
+        TodoModel i(2, date, "Faire les devoirs");
+        daoT.create(2, i);
     }
 }

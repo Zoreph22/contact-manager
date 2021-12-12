@@ -43,7 +43,14 @@ void InteractionModel::parseTodos()
             string resume = matches[1];
             string dateStr = matches[2];
 
+            Date now; now.setNow();
             Date date; dateStr.empty() ? date.setNow() : date.fromString(dateStr);
+
+            // TODO : update doxygen pour cette exception
+            if (date < now)
+            {
+                throw runtime_error("La date de réalisation doit être supérieure à celle d'aujourd'hui.");
+            }
 
             TodoModel todo(resume);
             todo.setDateTodo(date);
