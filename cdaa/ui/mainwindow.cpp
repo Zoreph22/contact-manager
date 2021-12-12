@@ -11,6 +11,8 @@
 #include <sqlitedaotodo.h>
 #include <QMessageBox>
 #include <QFileDialog>
+#include <idump.h>
+#include <dumpjson.h>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -227,7 +229,14 @@ void MainWindow::on_actionQuit_triggered()
 void MainWindow::on_actionExportJson_triggered()
 {
     QString chemin = QFileDialog::getSaveFileName(this, QString(), QString(), "JSON (*.json)");
-    qDebug() << chemin;
+    DumpJson dump(chemin);
+
+    try {
+        dump.dumpAll(this->contacts);
+        QMessageBox::information(this, "Information", "Exportation des données en JSON avec succès.");
+    }  catch (std::exception & e) {
+        QMessageBox::critical(this, "Erreur", e.what());
+    }
 }
 
 
