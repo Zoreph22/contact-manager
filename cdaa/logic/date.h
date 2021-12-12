@@ -34,7 +34,7 @@ public:
      * @param j Jour.
      * @param m Mois.
      * @param a Année.
-     * @throw domain_error Voir les exceptions de @link Date::fromDate() @endlink.
+     * @throw std::domain_error Voir les exceptions de @link Date::fromDate() @endlink.
      */
     Date(const unsigned int j, const unsigned int m, const unsigned int a);
     /**
@@ -52,16 +52,16 @@ public:
      * @param j Jour.
      * @param m Mois.
      * @param a Année.
-     * @throw domain_error @p j < 1 || @p j > 31.
-     * @throw domain_error @p m < 1 || @p m > 12.
-     * @throw domain_error @p a < 1970 || @p a > 3000.
+     * @throw std::domain_error @p j < 1 || @p j > 31.
+     * @throw std::domain_error @p m < 1 || @p m > 12.
+     * @throw std::domain_error @p a < 1970 || @p a > 3000.
      */
     void fromDate(const unsigned int j, const unsigned int m, const unsigned int a);
     /**
      * @brief Définir la date à partir d'un string.
      * @param date String contenant la date (format JJ/MM/AAAA, JJ-MM-AAAA).
-     * @throw invalid_argument Format de date invalide.
-     * @throw domain_error Voir les exceptions de @link Date::fromDate() @endlink.
+     * @throw std::invalid_argument Format de date invalide.
+     * @throw std::domain_error Voir les exceptions de @link Date::fromDate() @endlink.
      * @note Exemples de format de date valide : "22/07/2000", "22-07-2000", "22/7/2000", "22-7-2000".
      */
     void fromString(const string &date);
@@ -95,7 +95,7 @@ public:
     bool isNull() const;
     /// Définir la date à partir d'une structure date C.
     void setDate(const tm &newDate);
-        /// Définir la date sur la date du jour.
+    /// Définir la date sur la date du jour.
     void setNow();
     /// Définir la date sur une date vide.
     void setNull();

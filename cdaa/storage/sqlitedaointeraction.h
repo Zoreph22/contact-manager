@@ -6,6 +6,7 @@
 
 #include <QtSql/QtSql>
 
+/// Classe DAO de @link InteractionModel @endlink globaux pour une base de données SQLite.
 class STORAGE_EXPORT SQLiteDaoInteraction : public IDaoInteraction
 {
 public:

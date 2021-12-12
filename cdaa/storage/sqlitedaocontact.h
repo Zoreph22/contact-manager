@@ -6,6 +6,7 @@
 
 #include <QtSql/QtSql>
 
+/// Classe DAO de @link ContactModel @endlink pour une base de données SQLite.
 class STORAGE_EXPORT SQLiteDaoContact : public IDaoContact
 {
 public:

@@ -45,7 +45,7 @@ public:
      * @brief Constructeur par défaut.
      * Identifiant généré automatiquement, et date de création initialisée à la date du jour.
      * @param contenu Contenu de l'interaction (ne doit pas être vide).
-     * @throw invalid_argument Voir les exceptions de @link InteractionModel::setContenu() @endlink.
+     * @throw std::invalid_argument Voir les exceptions de @link InteractionModel::setContenu() @endlink.
      */
     InteractionModel(const string &contenu);
     /**
@@ -53,8 +53,8 @@ public:
      * @param id Identifiant unique.
      * @param dateInteraction Date de création de l'interaction (ne doit pas être vide).
      * @param contenu Contenu de l'interaction (ne doit pas être vide).
-     * @throw invalid_argument Voir les exceptions de @link InteractionModel::setContenu() @endlink.
-     * @throw invalid_argument Date de création vide.
+     * @throw std::invalid_argument Voir les exceptions de @link InteractionModel::setContenu() @endlink.
+     * @throw std::invalid_argument Date de création vide.
      */
     InteractionModel(unsigned int id, const Date &dateInteraction, const string &contenu);
     /**
@@ -74,6 +74,7 @@ public:
      * Pour chaque ligne du contenu, s'il n'y a pas de tag \@todo, la ligne est ignorée.
      * @n Si la ligne contient un \@todo, une instance @link TodoModel @endlink est créée et est ajoutée à la liste @link InteractionModel::todos @endlink.
      * @n S'il y a également un tag \@date, la date du todo est celle décrite par le tag, sinon c'est la date du jour qui est assignée.
+     * @throw std::runtime_error Date de réalisation d'un todo < date du jour.
      */
     void parseTodos();
 
@@ -103,7 +104,7 @@ public:
     /**
      * @brief Définir le contenu de l'interaction.
      * @param newContenu Contenu de l'interaction.
-     * @throw invalid_argument Contenu vide.
+     * @throw std::invalid_argument Contenu vide.
      * @details
      * <b>Exemple de contenu :</b>
      * @n Mon interaction

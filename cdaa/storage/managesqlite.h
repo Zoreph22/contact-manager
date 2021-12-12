@@ -4,6 +4,10 @@
 #include "imanagedatabase.h"
 #include "storage_global.h"
 
+/**
+ * @brief Classe pour la gestion de la structure d'une base de données SQLite.
+ * @throw std::runtime_error Toutes les méthodes en cas d'erreur lors des opérations.
+ */
 class STORAGE_EXPORT ManageSQLite : public IManageDatabase
 {
 public:

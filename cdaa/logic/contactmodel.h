@@ -49,7 +49,7 @@ public:
     /**
      * @brief Définir la date de la dernière suppression d'un contact.
      * @param newDateSuppression Nouvelle date de suppression.
-     * @throw invalid_argument Nouvelle date de suppression < date de suppression actuelle.
+     * @throw std::invalid_argument Nouvelle date de suppression < date de suppression actuelle.
      */
     static void setDateSuppression(const Date &newDateSuppression);
 
@@ -66,7 +66,7 @@ public:
      * @brief Créer une instance pré-initialisée.
      * @param id Identifiant unique.
      * @param dateCreation Date de création du contact (ne doit pas être vide).
-     * @throw invalid_argument Date de création vide.
+     * @throw std::invalid_argument Date de création vide.
      */
     ContactModel(unsigned int id, const Date &dateCreation);
     /**
@@ -111,7 +111,7 @@ public:
     /**
      * @brief Définir l'adresse e-mail.
      * @param newEmail Nouvelle adresse e-mail.
-     * @throw invalid_argument Format adresse e-mail invalide.
+     * @throw std::invalid_argument Format adresse e-mail invalide.
      * @see Formats adresse e-mail valides https://en.wikipedia.org/wiki/Email_address
      */
     void setEmail(const string &newEmail);
@@ -120,7 +120,7 @@ public:
     /**
      * @brief Définir le numéro de téléphone.
      * @param newTel Nouveau numéro de téléphone.
-     * @throw invalid_argument Format du numéro invalide.
+     * @throw std::invalid_argument Format du numéro invalide.
      * @note Exemples de format valide : +33618961596, 0618961596, 5214 (sans séparateurs).
      */
     void setTel(const string &newTel);
@@ -135,8 +135,8 @@ public:
     /**
      * @brief Définir la date de la dernière modification du contact.
      * @param newDateModification Nouvelle date de modification.
-     * @throw invalid_argument Nouvelle date de modification < date de création.
-     * @throw invalid_argument Nouvelle date de modification < date de modification actuelle.
+     * @throw std::invalid_argument Nouvelle date de modification < date de création.
+     * @throw std::invalid_argument Nouvelle date de modification < date de modification actuelle.
      */
     void setDateModification(const Date &newDateModification);
     /// Retourner la liste des interactions du contact.

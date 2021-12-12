@@ -6,6 +6,7 @@
 
 #include <QtSql/QtSql>
 
+/// Classe DAO de @link TodoModel @endlink pour une base de données SQLite.
 class STORAGE_EXPORT SQLiteDaoTodo : public IDaoTodo
 {
 public:

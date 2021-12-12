@@ -33,7 +33,7 @@ public:
      * @brief Constructeur par défaut.
      * Identifiant généré automatiquement, et date de réalisation initialisée à la date du jour.
      * @param resume Résumé du todo (ne doit pas être vide).
-     * @throw invalid_argument Voir les exceptions de @link TodoModel::setResume() @endlink.
+     * @throw std::invalid_argument Voir les exceptions de @link TodoModel::setResume() @endlink.
      */
     TodoModel(const string &resume);
     /**
@@ -41,8 +41,8 @@ public:
      * @param id Identifiant unique.
      * @param dateTodo Date de réalisation du todo (ne doit pas être vide).
      * @param resume Résumé du todo (ne doit pas être vide).
-     * @throw invalid_argument Voir les exceptions de @link TodoModel::setResume() @endlink.
-     * @throw invalid_argument Voir les exceptions de @link TodoModel::setDateTodo() @endlink.
+     * @throw std::invalid_argument Voir les exceptions de @link TodoModel::setResume() @endlink.
+     * @throw std::invalid_argument Voir les exceptions de @link TodoModel::setDateTodo() @endlink.
      */
     TodoModel(unsigned int id, const Date &dateTodo, const string &resume);
     /**
@@ -77,13 +77,13 @@ public:
     /**
      * @brief Définir le date de réalisation du todo.
      * @param newDateTodo Nouvelle date de réalisation.
-     * @throw invalid_argument Date de réalisation vide.
+     * @throw std::invalid_argument Date de réalisation vide.
      */
     void setDateTodo(const Date &newDateTodo);
     /**
      * @brief Définir le résumé du todo.
      * @param newResume Résumé du todo.
-     * @throw invalid_argument Résumé vide.
+     * @throw std::invalid_argument Résumé vide.
      */
     void setResume(const string &newResume);
 };

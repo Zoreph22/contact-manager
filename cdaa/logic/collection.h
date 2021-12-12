@@ -37,8 +37,8 @@ public:
     /*                                 Opérateurs                                 */
     /* -------------------------------------------------------------------------- */
 
+    /// Retourne une copie d'une autre collection.
     Collection<T> & operator=(const Collection<T>& collection);
-
     /// Retourne @a true si les deux collections contiennent des instances égales.
     bool operator==(const Collection<T> &collection) const;
     /// Retourne @a true si les deux collections ne contiennent pas des instances égales.
@@ -60,7 +60,7 @@ public:
     /**
      * @brief Retourner un élément par son index dans la liste.
      * @param index Index dans la liste.
-     * @throw out_of_range Index en dehors de la liste.
+     * @throw std::out_of_range Index en dehors de la liste.
      */
     T & getIndex(unsigned int index) const;
     /// Retourner le nombre d'instances dans la liste.
@@ -69,6 +69,7 @@ public:
     list<T> &getList() const;
 
 protected:
+    /// Retourner si @p string2 est contenu dans @p string1 sans respecter la casse.
     static bool findStrings(string string1, string string2);
 };
 

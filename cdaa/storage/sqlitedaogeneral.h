@@ -6,6 +6,7 @@
 
 #include <QtSql/QtSql>
 
+/// Classe DAO des attributs globaux pour une base de données SQLite.
 class STORAGE_EXPORT SQLiteDaoGeneral : public IDaoGeneral
 {
 public:
