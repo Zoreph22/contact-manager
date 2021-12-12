@@ -37,7 +37,7 @@ ContactEditWindow::ContactEditWindow(ContactModel &cm, bool isEdit, QWidget *par
     this->ui->lineEditTel->setText(StdQt::string(cm.getTel()));
     this->ui->lineEditEmail->setText(StdQt::string(cm.getEmail()));
 
-    QString str = cm.getPhoto().empty() ? "photos/profil.png" : StdQt::string(cm.getPhoto());
+    QString str = cm.getPhoto().empty() ? ":/resources/assets/profil.png" : StdQt::string(cm.getPhoto());
     this->ui->ButtonPhoto->setIcon(QIcon(str));
     this->ui->ButtonPhoto->setIconSize(QSize(64,64));
 
