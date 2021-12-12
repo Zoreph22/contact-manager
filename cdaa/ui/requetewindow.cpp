@@ -10,18 +10,24 @@ RequeteWindow::RequeteWindow(const ContactCollection & contacts, QWidget *parent
 {
     this->setWindowFlags(Qt::Window);
     this->ui->setupUi(this);
+    this->initWidgets();
+
+    this->connect(this->ui->buttonRechercher, SIGNAL(clicked()), this, SLOT(rechercher()));
+}
+
+RequeteWindow::~RequeteWindow()
+{
+    delete this->ui;
+}
+
+void RequeteWindow::initWidgets()
+{
     this->ui->frameFiltresTodo->setVisible(false);
     this->ui->dateEditInteractionMin->setDate(QDate::currentDate());
     this->ui->dateEditInteractionMax->setDate(QDate::currentDate());
     this->ui->dateEditTodoMin->setDate(QDate::currentDate());
     this->ui->dateEditTodoMax->setDate(QDate::currentDate());
-
     this->refreshComboBox();
-}
-
-RequeteWindow::~RequeteWindow()
-{
-    delete ui;
 }
 
 void RequeteWindow::refreshComboBox()
@@ -81,7 +87,7 @@ void RequeteWindow::queryTodos()
     this->filteredTodos.filterDateRealisation(dateMin, dateMax);
 }
 
-void RequeteWindow::on_buttonRechercher_clicked()
+void RequeteWindow::rechercher()
 {
     this->filteredContacts = this->contacts;
     this->filteredInteractions.clear();

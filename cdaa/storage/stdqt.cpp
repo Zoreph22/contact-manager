@@ -10,7 +10,7 @@ std::string StdQt::string(const QVariant &qVariant)
 {
     if (!qVariant.canConvert<QString>())
     {
-        throw runtime_error("Impossible de convertir le QVariant en QString");
+        throw std::runtime_error("Impossible de convertir le QVariant en QString");
     }
 
     return StdQt::string(qVariant.toString());
@@ -30,7 +30,7 @@ Date StdQt::date(const QVariant &qVariant)
 {
     if (!qVariant.canConvert<QDate>())
     {
-        throw runtime_error("Impossible de convertir le QVariant en QDate");
+        throw std::runtime_error("Impossible de convertir le QVariant en QDate");
     }
 
     return StdQt::date(qVariant.toDate());

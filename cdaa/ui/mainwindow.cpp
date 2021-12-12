@@ -20,16 +20,14 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     this->ui->setupUi(this);
-    this->ui->frameFilter->setVisible(false);
-    this->ui->dateEditMin->setDate(QDate::currentDate());
-    this->ui->dateEditMax->setDate(QDate::currentDate());
 
     this->init();
-    this->statutBar();
-    this->refreshFilteredContact();
-    this->refreshTable();
+    this->initWidgets();
 
-    connect(this->ui->tableWidget, SIGNAL(itemDoubleClicked(QTableWidgetItem*)), this, SLOT(on_itemDoubleClicked(QTableWidgetItem*)));
+    this->connect(this->ui->buttonFiltrer, SIGNAL(clicked()), this, SLOT(filtrer()));
+    this->connect(this->ui->buttonReset, SIGNAL(clicked()), this, SLOT(resetFiltres()));
+    this->connect(this->ui->ButtonCreateContact, SIGNAL(clicked()), this, SLOT(creerContact()));
+    this->connect(this->ui->tableWidget, SIGNAL(itemDoubleClicked(QTableWidgetItem*)), this, SLOT(editContact(QTableWidgetItem*)));
 }
 
 MainWindow::~MainWindow()
@@ -64,9 +62,19 @@ void MainWindow::init()
     try {
         this->loadData();
     }  catch (std::exception & e) {
-        QMessageBox::critical(this, "Erreur", "Impossible de charger les données. Essayez de réparer dans Fichier -> Réparer.");
+        QMessageBox::critical(this, "Erreur", "Impossible de charger les données.");
         qDebug() << e.what();
     }
+}
+
+void MainWindow::initWidgets()
+{
+    this->ui->frameFilter->setVisible(false);
+    this->ui->dateEditMin->setDate(QDate::currentDate());
+    this->ui->dateEditMax->setDate(QDate::currentDate());
+
+    this->statusBar();
+    this->refreshTable();
 }
 
 void MainWindow::loadData()
@@ -74,6 +82,7 @@ void MainWindow::loadData()
     ContactModel::idCount = this->daoContact->readMaxId();
     InteractionModel::idCount = this->daoInteraction->readMaxId();
     TodoModel::idCount = this->daoTodo->readMaxId();
+
     ContactModel::setDateSuppression(StdQt::date(this->daoGeneral->read("dateSuppression")));
 
     this->contacts.replace(daoContact->readAll());
@@ -89,36 +98,48 @@ void MainWindow::loadData()
     }
 }
 
-void MainWindow::refreshTable()
+void MainWindow::refreshStatusBar()
 {
-    this->refreshFilteredContact();
-    this->ui->tableWidget->setRowCount(0);
-    unsigned int nbC = this->contactsFiltered.count();
-
+    // Nombre de contacts.
     QString nbLabelContactCount;
     nbLabelContactCount.setNum(this->contacts.count());
     this->nbContact->setText("Nombre de contact : " + nbLabelContactCount);
 
+    // Date dernière suppression.
     Date dLastSuppr = ContactModel::getDateSuppression();
     QString sLastSuppr = !dLastSuppr.isNull() ? StdQt::string(dLastSuppr.toString()) : "Pas de suppression récente";
     this->lastSuppr->setText("Dernière suppression : " + sLastSuppr + "\t");
+}
 
-    QString s;
-    s.setNum(nbC);
-    this->ui->labelResult->setText("Résultat(s) : " + s);
+void MainWindow::refreshTable()
+{
+    this->refreshFilteredContact();
 
+    unsigned int nbC = this->contactsFiltered.count();
+
+    // Mettre à jour le nombre de résultats.
+    this->ui->labelResult->setText("Résultat(s) : " + StdQt::string(std::to_string(nbC)));
+
+    // Vider la table.
+    this->ui->tableWidget->setRowCount(0);
+
+    // Remplir la table à patir des contacts filtrés.
     for(unsigned int i=0;i<nbC;i++){
         ContactModel & c = this->contactsFiltered.getIndex(i);
 
+        // Case prénom.
         QTableWidgetItem * prenom = new QTableWidgetItem(StdQt::string(c.getPrenom()));
         prenom->setData(Qt::UserRole, QVariant(c.getId()));
 
+        // Case nom.
         QTableWidgetItem * nom = new QTableWidgetItem(StdQt::string(c.getNom()));
         nom->setData(Qt::UserRole, QVariant(c.getId()));
 
+        // Case entreprise.
         QTableWidgetItem * entreprise = new QTableWidgetItem(StdQt::string(c.getEntreprise()));
         entreprise->setData(Qt::UserRole, QVariant(c.getId()));
 
+        // Case date de création.
         QTableWidgetItem * datecreation = new QTableWidgetItem();
         datecreation->setData(Qt::DisplayRole, StdQt::string(c.getDateCreation().toString()));
         datecreation->setData(Qt::UserRole, QVariant(c.getId()));
@@ -132,14 +153,15 @@ void MainWindow::refreshTable()
     }
 }
 
-void MainWindow::statutBar()
+void MainWindow::statusBar()
 {
-    lastSuppr = new QLabel();
-    nbContact = new QLabel();
-    this->ui->statusbar->addWidget(lastSuppr, 0);
-    this->ui->statusbar->addWidget(nbContact, 0);
-    lastSuppr->setText("Dernière suppression : XX/XX/XXXX");
-    nbContact->setText("Nombre de contact :");
+    this->lastSuppr = new QLabel();
+    this->nbContact = new QLabel();
+    this->ui->statusbar->addWidget(this->lastSuppr, 0);
+    this->ui->statusbar->addWidget(this->nbContact, 0);
+    this->lastSuppr->setText("Dernière suppression : XX/XX/XXXX");
+    this->nbContact->setText("Nombre de contact :");
+    this->refreshStatusBar();
 }
 
 void MainWindow::refreshFilteredContact()
@@ -157,37 +179,45 @@ void MainWindow::refreshFilteredContact()
 
     this->contactsFiltered.filterDateCreation(dateMin, dateMax);
 
-    //Filter Entreprise
+    // Filter Entreprise
     if (!this->ui->lineEditFilterEntreprise->text().isEmpty()) filterEntreprise = StdQt::string(this->ui->lineEditFilterEntreprise->text());
     this->contactsFiltered.filterEntreprise(filterEntreprise);
 
-    //Filter Nom
+    // Filter Nom
     if (!this->ui->lineEditFilterNom->text().isEmpty()) filterNom = StdQt::string(this->ui->lineEditFilterNom->text());
     this->contactsFiltered.filterNom(filterNom);
 
-    //Filter Prenom
+    // Filter Prenom
     if (!this->ui->lineEditFilterPrenom->text().isEmpty()) filterPrenom = StdQt::string(this->ui->lineEditFilterPrenom->text());
     this->contactsFiltered.filterPrenom(filterPrenom);
 }
 
-void MainWindow::on_itemDoubleClicked(QTableWidgetItem *item)
+void MainWindow::editContact(QTableWidgetItem *item)
 {
     unsigned int idContact = item->data(Qt::UserRole).toUInt();
+
     ContactModel & original = this->contacts.getById(idContact);
     ContactModel nouveau = original;
+
     ContactEditWindow editC(nouveau, true);
     int ret = editC.exec();
+
+    // Le contact a été supprimé.
     if(ret == 2)
     {
         try {
             daoContact->destroy(original.getId());
+
+            // Supprimer le fichier de la photo du contact.
             QFile::remove(StdQt::string(original.getPhoto()));
             contacts.remove(original);
-            //Set la date de dernière suppression
+
+            // Set la date de dernière suppression
             Date dateSuppr;
             dateSuppr.setNow();
             daoGeneral->update("dateSuppression", QVariant(StdQt::date(dateSuppr)));
             ContactModel::setDateSuppression(dateSuppr);
+
             refreshTable();
         }  catch (std::runtime_error & e) {
             QMessageBox::critical(this, "Erreur", e.what());
@@ -195,11 +225,13 @@ void MainWindow::on_itemDoubleClicked(QTableWidgetItem *item)
 
     }
 
+    // Le contact a été mis à jour.
     if(ret == 1)
     {
         try {
             daoContact->update(nouveau);
             original = nouveau;
+
             refreshTable();
         }  catch (std::runtime_error & e) {
             QMessageBox::critical(this, "Erreur", e.what());
@@ -243,13 +275,17 @@ void MainWindow::on_actionExportJson_triggered()
 void MainWindow::on_actionResetAll_triggered()
 {
     QMessageBox::StandardButton button = QMessageBox::question(this, "Question", "Voulez-vous vraiment réinitialiser toutes les données ?");
+
     if(QMessageBox::Yes == button){
         try{
+            // Détruire tous les données.
             daoContact->destroyAll();
             contacts.clear();
-            Date d;
-            daoGeneral->update("dateSuppression", QVariant(StdQt::date(d)));
-            ContactModel::setDateSuppression(d);
+
+            // Mettre à jour la date de dernière suppression.
+            daoGeneral->update("dateSuppression", QVariant(StdQt::date(Date())));
+            ContactModel::setDateSuppression(Date());
+
             refreshTable();
         }  catch (std::exception & e) {
             QMessageBox::critical(this, "Erreur", e.what());
@@ -258,7 +294,7 @@ void MainWindow::on_actionResetAll_triggered()
 }
 
 
-void MainWindow::on_buttonReset_clicked()
+void MainWindow::resetFiltres()
 {
     this->ui->lineEditFilterEntreprise->setText("");
     this->ui->lineEditFilterNom->setText("");
@@ -271,9 +307,8 @@ void MainWindow::on_buttonReset_clicked()
 }
 
 
-void MainWindow::on_buttonFiltrer_clicked()
+void MainWindow::filtrer()
 {
-    this->refreshFilteredContact();
     this->refreshTable();
 }
 
@@ -285,15 +320,19 @@ void MainWindow::on_buttonRequest_clicked()
 }
 
 
-void MainWindow::on_ButtonCreateContact_clicked()
+void MainWindow::creerContact()
 {
     ContactModel c;
+
     ContactEditWindow editC(c, false);
     int ret = editC.exec();
+
+    // Le contact a été créé.
     if(ret == 1){
         try {
             daoContact->create(c);
             contacts.add(c);
+
             refreshTable();
         }  catch (std::runtime_error & e) {
             QMessageBox::critical(this, "Erreur", e.what());
@@ -308,10 +347,13 @@ void MainWindow::on_actionDonneesTest_triggered()
     if (button == QMessageBox::Yes)
     {
         try {
+            // Détruire tous les données.
             this->daoContact->destroyAll();
             this->contacts.clear();
+
             DaoDatabase::getManager()->insertMockData();
             this->loadData();
+
             this->refreshTable();
         }  catch (std::exception & e) {
             QMessageBox::critical(this, "Erreur", "Impossible d'insérer les données de test.");

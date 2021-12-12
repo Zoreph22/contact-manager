@@ -26,18 +26,22 @@ public:
     ~MainWindow();
 
 private:
-    /// Initialiser la fenêtre.
+    /// Initialiser l'application.
     void init();
     /// Charger les données depuis la base de données.
     void loadData();
 
+    /// Initialiser les widgets.
+    void initWidgets();
+    /// Initialiser la status bar.
+    void statusBar();
+
     /// Actualiser la table des contacts en prenant source la liste des contacts filtrés @link contactsFiltered @endlink.
     void refreshTable();
+    /// Actualiser la status bar.
+    void refreshStatusBar();
     /// Actualiser la liste @link contactsFiltered @endlink selon la recherche de l'utilisateur.
     void refreshFilteredContact();
-
-    /// Créer la status bar.
-    void statutBar();
 
 private:
     Ui::MainWindow *ui;
@@ -65,6 +69,16 @@ private:
     QLabel * nbContact;
 
 private slots:
+    /// Réinitialiser la recherche de l'utilisateur.
+    void resetFiltres();
+    /// Exécuter la recherche de l'utilisateur.
+    void filtrer();
+
+    /// Modifier un contact.
+    void editContact(QTableWidgetItem*item);
+    /// Créer un contact.
+    void creerContact();
+
     /// Slot lors du déclenchement de l'action <em>Insérer les données de test</em> du menu.
     void on_actionDonneesTest_triggered();
     /// Slot lors du déclenchement de l'action <em>Réinitialiser les données</em> du menu.
@@ -74,19 +88,9 @@ private slots:
     /// Slot lors du déclenchement de l'action @a Quitter du menu.
     void on_actionQuit_triggered();
 
-    /// Slot lors du clique sur le bouton <em>Réinitialiser les filtres</em>.
-    void on_buttonReset_clicked();
-    /// Slot lors du clique sur le bouton <em>Filtrer les contacts</em>.
-    void on_buttonFiltrer_clicked();
-
     /// Slot lors du clique sur le bouton <em>Faire une requête</em>.
     void on_buttonRequest_clicked();
-    /// Slot lors du clique sur le bouton <em>Créer un contact</em>.
-    void on_ButtonCreateContact_clicked();
     /// Slot lors du clique sur le bouton <em>Ouvrir les filtres</em>.
     void on_buttonOpenFilter_clicked();
-
-    /// Slot lors du double clique sur un contact de la table des contacts.
-    void on_itemDoubleClicked(QTableWidgetItem*item);
 };
 #endif // MAINWINDOW_H

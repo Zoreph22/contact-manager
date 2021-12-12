@@ -32,13 +32,17 @@ public:
     explicit InteractionEditWindow(InteractionModel &im, bool isEdit, QWidget *parent = nullptr);
     ~InteractionEditWindow();
 
+private:
+    /// Initialiser les widgets.
+    void initWidgets();
+
 private slots:
-    /// Slot lors du clique sur bouton @a Enregister.
-    void on_buttonEnregistrer_clicked();
-    /// Slot lors du clique sur bouton @a Annuler.
-    void on_buttonAnnuler_clicked();
-    /// Slot lors du clique sur bouton @a Supprimer.
-    void on_buttonSupprimer_clicked();
+    /// Enregister l'interaction et fermer la fenêtre.
+    void enregistrer();
+    /// Annuler la modification et fermer la fenêtre.
+    void annuler();
+    /// Supprimer l'interaction et fermer la fenêtre.
+    void supprimer();
 
 private:
     Ui::InteractionEditWindow *ui;

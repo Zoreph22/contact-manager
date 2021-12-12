@@ -37,26 +37,29 @@ public:
     ~ContactEditWindow();
 
 private slots:
-    /// Slot lors du clique sur bouton @a Supprimer.
-    void on_buttonSupprimer_clicked();
-    /// Slot lors du clique sur bouton @a Enregister.
-    void on_buttonEnregister_clicked();
-    /// Slot lors du clique sur bouton @a Annuler.
-    void on_buttonAnnuler_clicked();
-    /// Slot lors du clique sur bouton @a Créer @a interaction.
-    void on_buttonCreateInteraction_clicked();
+    /// Slot lors du clique sur bouton @a Supprimer. TODO
+    void supprimer();
+    /// Slot lors du clique sur bouton @a Enregister. TODO
+    void enregistrer();
+    /// Slot lors du clique sur bouton @a Annuler. TODO
+    void annuler();
+    /// Slot lors du clique sur bouton @a Créer @a interaction. TODO
+    void creerInteraction();
+
+    /// Slot lors du double clique sur une interaction de la table.
+    void editInteraction(QTableWidgetItem*item);
+    /// Slot lors du clique sur l'image.
+    void editPhoto();
 
     /// Slot lors du changement de texte dans le champ de texte @a Prénom
-    void on_lineEditPrenom_textChanged(const QString &arg1);
+    void on_lineEditPrenom_textChanged();
     /// Slot lors du changement de texte dans le champ de texte @a Nom
-    void on_lineEditNom_textChanged(const QString &arg1);
-    /// Slot lors du double clique sur une interaction de la table.
-    void on_itemDoubleClicked(QTableWidgetItem*item);
-
-    /// Slot lors du clique sur l'image.
-    void on_ButtonPhoto_clicked();
+    void on_lineEditNom_textChanged();
 
 private:
+    /// Initialiser les widgets.
+    void initWidgets();
+
     /// Actualiser la table des interactions et des todos.
     void refreshInteractionsAndTodosTable();
 

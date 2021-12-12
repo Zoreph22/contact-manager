@@ -36,6 +36,9 @@ public:
     ~RequeteWindow();
 
 private:
+    /// Initialiser les widgets.
+    void initWidgets();
+
     /// Actualiser la liste déroulante affichant l'ensemble des contacts.
     void refreshComboBox();
     /// Actualiser la zone des résultats.
@@ -47,8 +50,8 @@ private:
     void queryTodos();
 
 private slots:
-    /// Slot lors du clique sur le bouton @a Rechercher.
-    void on_buttonRechercher_clicked();
+    /// Exécuter la recherche.
+    void rechercher();
 
     /// Slot lors du toggle de la radio @a Interactions.
     void on_radioInteractions_toggled(bool checked);
