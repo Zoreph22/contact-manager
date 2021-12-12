@@ -99,3 +99,16 @@ void SQLiteDaoTodo::destroy(unsigned int id) const
         throw std::runtime_error("Impossible de supprimer le todo de la base de données : " + query.lastError().text().toStdString());
     }
 }
+
+void SQLiteDaoTodo::destroyAll(unsigned int interactionId) const
+{
+    QSqlQuery query;
+    query.prepare("DELETE FROM Todo WHERE id_interaction = :id_interaction");
+
+    query.bindValue(":id_interaction", interactionId);
+
+    if (!query.exec())
+    {
+        throw std::runtime_error("Impossible de supprimer les todos de l'interaction n°" + std::to_string(interactionId) + " de la base de données : " + query.lastError().text().toStdString());
+    }
+}

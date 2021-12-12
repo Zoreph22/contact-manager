@@ -17,6 +17,7 @@ public:
     TodoCollection readAll(unsigned int interactionId) const;
     void update(const TodoModel &todo) const;
     void destroy(unsigned int id) const;
+    void destroyAll(unsigned int interactionId) const;
 };
 
 #endif // SQLITEDAOTODO_H

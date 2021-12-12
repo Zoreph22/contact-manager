@@ -34,7 +34,7 @@ ContactEditWindow::ContactEditWindow(ContactModel &cm, bool isEdit, QWidget *par
     this->ui->lineEditTel->setText(StdQt::string(cm.getTel()));
     this->ui->lineEditEmail->setText(StdQt::string(cm.getEmail()));
 
-    QString str = cm.getPhoto().empty() ? "../../database/profil.png" : StdQt::string(cm.getPhoto());
+    QString str = cm.getPhoto().empty() ? "photos/profil.png" : StdQt::string(cm.getPhoto());
     this->ui->ButtonPhoto->setIcon(QIcon(str));
     this->ui->ButtonPhoto->setIconSize(QSize(64,64));
 
@@ -97,6 +97,12 @@ void ContactEditWindow::on_buttonCreateInteraction_clicked()
         try {
             daoInteraction->create(cm.getId(), i);
             i.parseTodos();
+
+            for (TodoModel & newTodo : i.getTodos().getList())
+            {
+                this->daoTodo->create(i.getId(), newTodo);
+            }
+
             cm.getInteractions().add(i);
             refreshInteractionAndTodosTable();
         }  catch (std::exception & e) {
@@ -124,6 +130,7 @@ void ContactEditWindow::on_itemDoubleClicked(QTableWidgetItem *item)
     InteractionModel nouveau = original;
     InteractionEditWindow editI(nouveau, true);
     int ret = editI.exec();
+
     if(ret == 2)
     {
         try {
@@ -140,9 +147,19 @@ void ContactEditWindow::on_itemDoubleClicked(QTableWidgetItem *item)
     {
         try {
             daoInteraction->update(nouveau);
+
+            // Supprimer les anciens todos.
+            this->daoTodo->destroyAll(idInteraction);
+
+            // Ajouter les nouveaux todos.
             original = nouveau;
             original.parseTodos();
-            //daoTodo-->update(); //TODO Fixé sa
+
+            for (TodoModel & newTodo : nouveau.getTodos().getList())
+            {
+                this->daoTodo->create(nouveau.getId(), newTodo);
+            }
+
             refreshInteractionAndTodosTable();
         }  catch (std::exception & e) {
             QMessageBox::critical(this, "Erreur", e.what());
@@ -219,7 +236,7 @@ void ContactEditWindow::on_ButtonPhoto_clicked()
     this->ui->ButtonPhoto->setIconSize(QSize(64,64));
 
     //Copy and save image
-    QString destinationDir = "../../database";
+    QString destinationDir = "photos";
     QFileInfo fileInfo(chemin);
     QString id;
     id.setNum(cm.getId());

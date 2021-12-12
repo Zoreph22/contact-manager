@@ -180,6 +180,7 @@ void MainWindow::on_itemDoubleClicked(QTableWidgetItem *item)
     {
         try {
             daoContact->destroy(original.getId());
+            QFile::remove(StdQt::string(original.getPhoto()));
             contacts.remove(original);
             //Set la date de dernière suppression
             Date dateSuppr;

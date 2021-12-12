@@ -17,6 +17,7 @@ public:
     virtual TodoCollection readAll(unsigned int interactionId) const = 0;
     virtual void update(const TodoModel & todo) const = 0;
     virtual void destroy(unsigned int id) const = 0;
+    virtual void destroyAll(unsigned int interactionId) const = 0;
 };
 
 #endif // IDAOTODO_H
