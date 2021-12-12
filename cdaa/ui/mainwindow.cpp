@@ -99,8 +99,8 @@ void MainWindow::refreshTable()
     this->nbContact->setText("Nombre de contact : " + nbLabelContactCount);
 
     Date dLastSuppr = ContactModel::getDateSuppression();
-    QString sLastModif = !dLastSuppr.isNull() ? StdQt::string(dLastSuppr.toString()) : "Pas de suppression récente";
-    this->lastModif->setText("Dernière suppression : " + sLastModif + "\t");
+    QString sLastSuppr = !dLastSuppr.isNull() ? StdQt::string(dLastSuppr.toString()) : "Pas de suppression récente";
+    this->lastSuppr->setText("Dernière suppression : " + sLastSuppr + "\t");
 
     QString s;
     s.setNum(nbC);
@@ -133,11 +133,11 @@ void MainWindow::refreshTable()
 
 void MainWindow::statutBar()
 {
-    lastModif = new QLabel();
+    lastSuppr = new QLabel();
     nbContact = new QLabel();
-    this->ui->statusbar->addWidget(lastModif, 0);
+    this->ui->statusbar->addWidget(lastSuppr, 0);
     this->ui->statusbar->addWidget(nbContact, 0);
-    lastModif->setText("Dernière suppression : XX/XX/XXXX");
+    lastSuppr->setText("Dernière suppression : XX/XX/XXXX");
     nbContact->setText("Nombre de contact :");
 }
 
@@ -298,12 +298,6 @@ void MainWindow::on_ButtonCreateContact_clicked()
             QMessageBox::critical(this, "Erreur", e.what());
         }
     }
-}
-
-
-void MainWindow::on_dateEditMin_userDateChanged(const QDate &date)
-{
-
 }
 
 void MainWindow::on_actionDonneesTest_triggered()

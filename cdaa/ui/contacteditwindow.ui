@@ -358,14 +358,14 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_9">
        <item>
-        <widget class="QPushButton" name="pushButton_6">
+        <widget class="QPushButton" name="buttonSupprimer">
          <property name="text">
           <string>&amp;Supprimer</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_5">
+        <widget class="QPushButton" name="buttonEnregister">
          <property name="text">
           <string>&amp;Enregistrer</string>
          </property>

@@ -16,13 +16,16 @@ ContactEditWindow::ContactEditWindow(ContactModel &cm, bool isEdit, QWidget *par
 {
     this->setWindowFlags(Qt::Window);
     this->ui->setupUi(this);
-    this->init();
-    this->refreshInteractionAndTodosTable();
 
-    ui->pushButton_5->setDisabled(cm.getNom().empty() || cm.getPrenom().empty());
+    this->daoInteraction = new SQLiteDaoInteraction();
+    this->daoTodo = new SQLiteDaoTodo();
+
+    this->refreshInteractionsAndTodosTable();
+
+    ui->buttonEnregister->setDisabled(cm.getNom().empty() || cm.getPrenom().empty());
 
     if(!isEdit){
-        this->ui->pushButton_6->setVisible(false);
+        this->ui->buttonSupprimer->setVisible(false);
         this->ui->buttonCreateInteraction->setEnabled(false);
     }
 
@@ -54,7 +57,7 @@ ContactEditWindow::~ContactEditWindow()
     delete this->daoTodo;
 }
 
-void ContactEditWindow::on_pushButton_6_clicked()
+void ContactEditWindow::on_buttonSupprimer_clicked()
 {
     QMessageBox::StandardButton button = QMessageBox::question(this, "Question", "Voulez-vous vraiment supprimer ce contact ?");
     if(QMessageBox::Yes == button)
@@ -62,7 +65,7 @@ void ContactEditWindow::on_pushButton_6_clicked()
 }
 
 
-void ContactEditWindow::on_pushButton_5_clicked()
+void ContactEditWindow::on_buttonEnregister_clicked()
 {
     try {
         if(isEdit){
@@ -104,7 +107,7 @@ void ContactEditWindow::on_buttonCreateInteraction_clicked()
             }
 
             cm.getInteractions().add(i);
-            refreshInteractionAndTodosTable();
+            refreshInteractionsAndTodosTable();
         }  catch (std::exception & e) {
             QMessageBox::critical(this, "Erreur", e.what());
         }
@@ -114,13 +117,13 @@ void ContactEditWindow::on_buttonCreateInteraction_clicked()
 
 void ContactEditWindow::on_lineEditPrenom_textChanged(const QString &arg1)
 {
-     ui->pushButton_5->setDisabled(this->ui->lineEditPrenom->text().isEmpty() || this->ui->lineEditNom->text().isEmpty());
+     ui->buttonEnregister->setDisabled(this->ui->lineEditPrenom->text().isEmpty() || this->ui->lineEditNom->text().isEmpty());
 }
 
 
 void ContactEditWindow::on_lineEditNom_textChanged(const QString &arg1)
 {
-    ui->pushButton_5->setDisabled(this->ui->lineEditNom->text().isEmpty() || this->ui->lineEditPrenom->text().isEmpty());
+    ui->buttonEnregister->setDisabled(this->ui->lineEditNom->text().isEmpty() || this->ui->lineEditPrenom->text().isEmpty());
 }
 
 void ContactEditWindow::on_itemDoubleClicked(QTableWidgetItem *item)
@@ -136,7 +139,7 @@ void ContactEditWindow::on_itemDoubleClicked(QTableWidgetItem *item)
         try {
             daoInteraction->destroy(original.getId());
             cm.getInteractions().remove(original);
-            refreshInteractionAndTodosTable();
+            refreshInteractionsAndTodosTable();
         }  catch (std::exception & e) {
             QMessageBox::critical(this, "Erreur", e.what());
         }
@@ -160,14 +163,14 @@ void ContactEditWindow::on_itemDoubleClicked(QTableWidgetItem *item)
                 this->daoTodo->create(nouveau.getId(), newTodo);
             }
 
-            refreshInteractionAndTodosTable();
+            refreshInteractionsAndTodosTable();
         }  catch (std::exception & e) {
             QMessageBox::critical(this, "Erreur", e.what());
         }
     }
 }
 
-void ContactEditWindow::refreshInteractionAndTodosTable()
+void ContactEditWindow::refreshInteractionsAndTodosTable()
 {
     this->ui->tableWidgetTodos->setSortingEnabled(false);
 
@@ -215,13 +218,6 @@ void ContactEditWindow::refreshInteractionAndTodosTable()
     this->ui->tableWidgetTodos->setSortingEnabled(true);
     this->ui->tableWidgetTodos->sortItems(0, Qt::AscendingOrder);
 }
-
-void ContactEditWindow::init()
-{
-    this->daoInteraction = new SQLiteDaoInteraction();
-    this->daoTodo = new SQLiteDaoTodo();
-}
-
 
 void ContactEditWindow::on_ButtonPhoto_clicked()
 {

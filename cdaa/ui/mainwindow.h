@@ -16,6 +16,7 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
+/// Fenêtre principale de l'application. Elle affiche notamment la liste des contacts et permet d'accéder aux autres fenêtres
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -25,40 +26,67 @@ public:
     ~MainWindow();
 
 private:
+    /// Initialiser la fenêtre.
     void init();
+    /// Charger les données depuis la base de données.
     void loadData();
+
+    /// Actualiser la table des contacts en prenant source la liste des contacts filtrés @link contactsFiltered @endlink.
     void refreshTable();
-    void statutBar();
+    /// Actualiser la liste @link contactsFiltered @endlink selon la recherche de l'utilisateur.
     void refreshFilteredContact();
+
+    /// Créer la status bar.
+    void statutBar();
 
 private:
     Ui::MainWindow *ui;
 
-    IDaoContact * daoContact;
-    IDaoInteraction * daoInteraction;
-    IDaoTodo * daoTodo;
+    /// DAO des attributs globaux.
     IDaoGeneral * daoGeneral;
+    /// DAO des contacts.
+    IDaoContact * daoContact;
+    /// DAO des interactions.
+    IDaoInteraction * daoInteraction;
+    /// DAO des todos.
+    IDaoTodo * daoTodo;
 
+    /// Liste de l'ensemble des contacts.
     ContactCollection contacts;
+    /// Liste des contacts filtrés selon la recherche de l'utilisateur.
     ContactCollection contactsFiltered;
 
+    /// Panneau des filtres ouverts ?
     bool isFilterOpen = false;
 
-    QLabel * lastModif;
+    /// Label affichant la date de dernière suppression dans la status bar.
+    QLabel * lastSuppr;
+    /// Label affichant le nombre de contacts totals dans la status bar.
     QLabel * nbContact;
 
 private slots:
-    void on_actionQuit_triggered();
-    void on_actionExportJson_triggered();
-    void on_actionResetAll_triggered();
-    void on_buttonReset_clicked();
-    void on_buttonFiltrer_clicked();
-    void on_buttonRequest_clicked();
-    void on_ButtonCreateContact_clicked();
-    void on_buttonOpenFilter_clicked();
-    void on_dateEditMin_userDateChanged(const QDate &date);
-
-    void on_itemDoubleClicked(QTableWidgetItem*item);
+    /// Slot lors du déclenchement de l'action <em>Insérer les données de test</em> du menu.
     void on_actionDonneesTest_triggered();
+    /// Slot lors du déclenchement de l'action <em>Réinitialiser les données</em> du menu.
+    void on_actionResetAll_triggered();
+    /// Slot lors du déclenchement de l'action <em>Exporter en JSON</em> du menu.
+    void on_actionExportJson_triggered();
+    /// Slot lors du déclenchement de l'action @a Quitter du menu.
+    void on_actionQuit_triggered();
+
+    /// Slot lors du clique sur le bouton <em>Réinitialiser les filtres</em>.
+    void on_buttonReset_clicked();
+    /// Slot lors du clique sur le bouton <em>Filtrer les contacts</em>.
+    void on_buttonFiltrer_clicked();
+
+    /// Slot lors du clique sur le bouton <em>Faire une requête</em>.
+    void on_buttonRequest_clicked();
+    /// Slot lors du clique sur le bouton <em>Créer un contact</em>.
+    void on_ButtonCreateContact_clicked();
+    /// Slot lors du clique sur le bouton <em>Ouvrir les filtres</em>.
+    void on_buttonOpenFilter_clicked();
+
+    /// Slot lors du double clique sur un contact de la table des contacts.
+    void on_itemDoubleClicked(QTableWidgetItem*item);
 };
 #endif // MAINWINDOW_H

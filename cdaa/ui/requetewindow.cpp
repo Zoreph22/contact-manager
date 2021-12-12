@@ -97,24 +97,6 @@ void RequeteWindow::on_buttonRechercher_clicked()
     this->refreshResults();
 }
 
-
-void RequeteWindow::on_buttonFermer_clicked()
-{
-
-}
-
-
-void RequeteWindow::on_radioInteractions_clicked()
-{
-}
-
-
-void RequeteWindow::on_radioTodos_clicked()
-{
-
-}
-
-
 void RequeteWindow::on_radioInteractions_toggled(bool checked)
 {
     if (checked) this->sujet = Sujet::Interactions;
