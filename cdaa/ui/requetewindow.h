@@ -1,8 +1,9 @@
 #ifndef REQUETEWINDOW_H
 #define REQUETEWINDOW_H
 
-#include <QDialog>
 #include <contactcollection.h>
+
+#include <QDialog>
 
 namespace Ui {
 class RequeteWindow;

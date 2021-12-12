@@ -46,7 +46,6 @@ void InteractionModel::parseTodos()
             Date now; now.setNow();
             Date date; dateStr.empty() ? date.setNow() : date.fromString(dateStr);
 
-            // TODO : update doxygen pour cette exception
             if (date < now)
             {
                 throw runtime_error("La date de réalisation doit être supérieure à celle d'aujourd'hui.");

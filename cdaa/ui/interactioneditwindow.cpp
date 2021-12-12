@@ -1,10 +1,11 @@
 #include "interactioneditwindow.h"
 #include "ui_interactioneditwindow.h"
-#include "stdqt.h"
-#include <QMessageBox>
-#include <QDebug>
 
 #include <interactionmodel.h>
+#include <stdqt.h>
+
+#include <QMessageBox>
+#include <QDebug>
 
 InteractionEditWindow::InteractionEditWindow(InteractionModel &im, bool isEdit,QWidget *parent) :
     QDialog(parent),

@@ -1,6 +1,6 @@
 #include "contacteditwindow.h"
-#include "mainwindow.h"
 #include "requetewindow.h"
+#include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 #include <daodatabase.h>
@@ -9,10 +9,11 @@
 #include <sqlitedaogeneral.h>
 #include <sqlitedaointeraction.h>
 #include <sqlitedaotodo.h>
-#include <QMessageBox>
-#include <QFileDialog>
 #include <idump.h>
 #include <dumpjson.h>
+
+#include <QMessageBox>
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)

@@ -1,12 +1,13 @@
 #ifndef CONTACTEDITWINDOW_H
 #define CONTACTEDITWINDOW_H
 
-#include <QDialog>
-#include <QWidget>
 #include <contactmodel.h>
 #include <idaointeraction.h>
 #include <idaotodo.h>
-#include <qtablewidget.h>
+
+#include <QDialog>
+#include <QWidget>
+#include <QTableWidget>
 
 namespace Ui {
 class ContactEditWindow;

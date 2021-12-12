@@ -1,16 +1,16 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <idaocontact.h>
+#include <idaogeneral.h>
+#include <idaointeraction.h>
+#include <idaotodo.h>
+#include <contactcollection.h>
 #include "requetewindow.h"
 
 #include <QLabel>
 #include <QMainWindow>
 #include <QTableWidgetItem>
-#include <contactcollection.h>
-#include <idaocontact.h>
-#include <idaogeneral.h>
-#include <idaointeraction.h>
-#include <idaotodo.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

@@ -3,8 +3,9 @@
 
 #include "storage_global.h"
 
-#include <QString>
 #include <contactcollection.h>
+
+#include <QString>
 
 /// Interface pour générer des dumps des données de l'application.
 class STORAGE_EXPORT IDump

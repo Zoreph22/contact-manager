@@ -1,9 +1,10 @@
 #ifndef INTERACTIONEDITWINDOW_H
 #define INTERACTIONEDITWINDOW_H
 
+#include <interactionmodel.h>
+
 #include <QDialog>
 #include <QWidget>
-#include <interactionmodel.h>
 
 namespace Ui {
 class InteractionEditWindow;

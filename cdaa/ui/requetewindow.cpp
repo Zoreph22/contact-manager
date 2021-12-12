@@ -1,7 +1,7 @@
 #include "requetewindow.h"
 #include "ui_requetewindow.h"
 
-#include "stdqt.h"
+#include <stdqt.h>
 
 RequeteWindow::RequeteWindow(const ContactCollection & contacts, QWidget *parent) :
     QDialog(parent),

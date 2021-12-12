@@ -1,12 +1,14 @@
+#include "interactioneditwindow.h"
 #include "contacteditwindow.h"
 #include "ui_contacteditwindow.h"
-#include "stdqt.h"
-#include "interactioneditwindow.h"
+
+#include <sqlitedaointeraction.h>
+#include <sqlitedaotodo.h>
+#include <stdqt.h>
+
 #include <QMessageBox>
 #include <QDebug>
-#include <sqlitedaointeraction.h>
 #include <QFileDialog>
-#include <sqlitedaotodo.h>
 
 ContactEditWindow::ContactEditWindow(ContactModel &cm, bool isEdit, QWidget *parent) :
     QDialog(parent),

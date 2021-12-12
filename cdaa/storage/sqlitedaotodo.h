@@ -1,8 +1,8 @@
 #ifndef SQLITEDAOTODO_H
 #define SQLITEDAOTODO_H
 
-#include "idaotodo.h"
 #include "storage_global.h"
+#include "idaotodo.h"
 
 #include <QtSql/QtSql>
 

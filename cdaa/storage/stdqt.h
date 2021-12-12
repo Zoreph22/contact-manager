@@ -3,9 +3,10 @@
 
 #include "storage_global.h"
 
+#include <date.h>
+
 #include <QDate>
 #include <QVariant>
-#include <date.h>
 
 /// Classe statique utilitaire pour convertir un type C++ standard en un type Qt et inversement.
 class STORAGE_EXPORT StdQt
