@@ -3,6 +3,7 @@
 
 #include "requetewindow.h"
 
+#include <QLabel>
 #include <QMainWindow>
 #include <QTableWidgetItem>
 #include <contactcollection.h>
@@ -27,6 +28,8 @@ private:
     void init();
     void loadData();
     void refreshTable();
+    void statutBar();
+    void refreshFilteredContact();
 
 private:
     Ui::MainWindow *ui;
@@ -37,8 +40,12 @@ private:
     IDaoGeneral * daoGeneral;
 
     ContactCollection contacts;
+    ContactCollection contactsFiltered;
 
     bool isFilterOpen = false;
+
+    QLabel * lastModif;
+    QLabel * nbContact;
 
 private slots:
     void on_actionQuit_triggered();

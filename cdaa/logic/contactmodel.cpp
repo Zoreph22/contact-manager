@@ -11,7 +11,7 @@ const Date &ContactModel::getDateSuppression()
 
 void ContactModel::setDateSuppression(const Date &newDateSuppression)
 {
-    if (newDateSuppression < ContactModel::dateSuppression)
+    if (!newDateSuppression.isNull() && newDateSuppression < ContactModel::dateSuppression)
     {
         throw invalid_argument("La nouvelle date de suppression doit être supérieure ou égale à la date de suppression actuelle");
     }

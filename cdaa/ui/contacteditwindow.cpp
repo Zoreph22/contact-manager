@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <sqlitedaointeraction.h>
 #include <QFileDialog>
+#include <sqlitedaotodo.h>
 
 ContactEditWindow::ContactEditWindow(ContactModel &cm, bool isEdit, QWidget *parent) :
     QDialog(parent),
@@ -22,7 +23,10 @@ ContactEditWindow::ContactEditWindow(ContactModel &cm, bool isEdit, QWidget *par
 
     if(!isEdit){
         this->ui->pushButton_6->setVisible(false);
+        this->ui->buttonCreateInteraction->setEnabled(false);
     }
+
+    this->ui->tableWidgetTodos->sortItems(0, Qt::AscendingOrder);
 
     this->ui->lineEditPrenom->setText(StdQt::string(cm.getPrenom()));
     this->ui->lineEditNom->setText(StdQt::string(cm.getNom()));
@@ -47,6 +51,7 @@ ContactEditWindow::~ContactEditWindow()
 {
     delete this->ui;
     delete this->daoInteraction;
+    delete this->daoTodo;
 }
 
 void ContactEditWindow::on_pushButton_6_clicked()
@@ -115,7 +120,7 @@ void ContactEditWindow::on_lineEditNom_textChanged(const QString &arg1)
 void ContactEditWindow::on_itemDoubleClicked(QTableWidgetItem *item)
 {
     unsigned int idInteraction = item->data(Qt::UserRole).toUInt();
-    InteractionModel & original = this->cm.getInteractions().getIndex(idInteraction);
+    InteractionModel & original = this->cm.getInteractions().getById(idInteraction);
     InteractionModel nouveau = original;
     InteractionEditWindow editI(nouveau, true);
     int ret = editI.exec();
@@ -137,6 +142,7 @@ void ContactEditWindow::on_itemDoubleClicked(QTableWidgetItem *item)
             daoInteraction->update(nouveau);
             original = nouveau;
             original.parseTodos();
+            //daoTodo-->update(); //TODO Fixé sa
             refreshInteractionAndTodosTable();
         }  catch (std::exception & e) {
             QMessageBox::critical(this, "Erreur", e.what());
@@ -146,6 +152,8 @@ void ContactEditWindow::on_itemDoubleClicked(QTableWidgetItem *item)
 
 void ContactEditWindow::refreshInteractionAndTodosTable()
 {
+    this->ui->tableWidgetTodos->setSortingEnabled(false);
+
     this->ui->tableWidgetInteraction->setRowCount(0);
     this->ui->tableWidgetTodos->setRowCount(0);
 
@@ -156,11 +164,12 @@ void ContactEditWindow::refreshInteractionAndTodosTable()
     for(unsigned int i=0;i<nbI;i++){
         InteractionModel & inte = this->cm.getInteractions().getIndex(i);
 
-        QTableWidgetItem * dateInter = new QTableWidgetItem(StdQt::string(inte.getDateInteraction().toString()));
-        dateInter->setData(Qt::UserRole, QVariant(i));
+        QTableWidgetItem * dateInter = new QTableWidgetItem();
+        dateInter->setData(Qt::DisplayRole, StdQt::string(inte.getDateInteraction().toString()));
+        dateInter->setData(Qt::UserRole, QVariant(inte.getId()));
 
         QTableWidgetItem * contenu = new QTableWidgetItem(StdQt::string(inte.getContenu()));
-        contenu->setData(Qt::UserRole, QVariant(i));
+        contenu->setData(Qt::UserRole, QVariant(inte.getId()));
 
         this->ui->tableWidgetInteraction->insertRow(i);
 
@@ -171,11 +180,12 @@ void ContactEditWindow::refreshInteractionAndTodosTable()
         for(unsigned int j=0;j<inte.getTodos().count();j++){
             TodoModel & todo = inte.getTodos().getIndex(j);
 
-            QTableWidgetItem * dateRea = new QTableWidgetItem(StdQt::string(todo.getDateTodo().toString()));
-            dateRea->setData(Qt::UserRole, QVariant(curTodosIndexTable));
+            QTableWidgetItem * dateRea = new QTableWidgetItem();
+            dateRea->setData(Qt::DisplayRole, StdQt::date(todo.getDateTodo()));
+            dateRea->setData(Qt::UserRole, QVariant(todo.getId()));
 
             QTableWidgetItem * tache = new QTableWidgetItem(StdQt::string(todo.getResume()));
-            tache->setData(Qt::UserRole, QVariant(curTodosIndexTable));
+            tache->setData(Qt::UserRole, QVariant(todo.getId()));
 
             this->ui->tableWidgetTodos->insertRow(curTodosIndexTable);
 
@@ -185,11 +195,14 @@ void ContactEditWindow::refreshInteractionAndTodosTable()
             curTodosIndexTable++;
         }
     }
+    this->ui->tableWidgetTodos->setSortingEnabled(true);
+    this->ui->tableWidgetTodos->sortItems(0, Qt::AscendingOrder);
 }
 
 void ContactEditWindow::init()
 {
     this->daoInteraction = new SQLiteDaoInteraction();
+    this->daoTodo = new SQLiteDaoTodo();
 }
 
 
@@ -197,6 +210,8 @@ void ContactEditWindow::on_ButtonPhoto_clicked()
 {
     //Load image
     QString chemin = QFileDialog::getOpenFileName(this, QString(), QString(), "Image (*.png *.jpg *.jpeg)");
+    if(chemin.isEmpty()) return;
+
     QImage img(chemin);
     QImage img2 = img.scaled(64,64, Qt::KeepAspectRatio);
     QPixmap pixmap =  QPixmap::fromImage(img2);
