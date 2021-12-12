@@ -26,6 +26,8 @@ InteractionEditWindow::~InteractionEditWindow()
     delete this->ui;
 }
 
+
+
 void InteractionEditWindow::initWidgets()
 {
     if (!this->isEdit)
@@ -36,6 +38,8 @@ void InteractionEditWindow::initWidgets()
     this->ui->textEdit->setText(StdQt::string(isEdit ? im.getContenu() : ""));
     this->ui->labelDateCreation->setText("Date de création : " + StdQt::string(im.getDateInteraction().toString()));
 }
+
+
 
 void InteractionEditWindow::enregistrer()
 {

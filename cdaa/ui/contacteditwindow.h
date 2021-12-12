@@ -37,18 +37,18 @@ public:
     ~ContactEditWindow();
 
 private slots:
-    /// Slot lors du clique sur bouton @a Supprimer. TODO
+    /// Supprimer le contact et fermer la fenêtre.
     void supprimer();
-    /// Slot lors du clique sur bouton @a Enregister. TODO
+    /// Enregister le contact et fermer la fenêtre.
     void enregistrer();
-    /// Slot lors du clique sur bouton @a Annuler. TODO
+    /// Annuler la modification et fermer la fenêtre.
     void annuler();
-    /// Slot lors du clique sur bouton @a Créer @a interaction. TODO
-    void creerInteraction();
 
-    /// Slot lors du double clique sur une interaction de la table.
+    /// Créer une interaction.
+    void creerInteraction();
+    /// Modifier une interaction.
     void editInteraction(QTableWidgetItem*item);
-    /// Slot lors du clique sur l'image.
+    /// Modifier la photo.
     void editPhoto();
 
     /// Slot lors du changement de texte dans le champ de texte @a Prénom

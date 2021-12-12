@@ -42,6 +42,8 @@ MainWindow::~MainWindow()
     DaoDatabase::close();
 }
 
+
+
 void MainWindow::init()
 {
     // Ouvrir la base de données.
@@ -98,6 +100,19 @@ void MainWindow::loadData()
     }
 }
 
+void MainWindow::statusBar()
+{
+    this->lastSuppr = new QLabel();
+    this->nbContact = new QLabel();
+    this->ui->statusbar->addWidget(this->lastSuppr, 0);
+    this->ui->statusbar->addWidget(this->nbContact, 0);
+    this->lastSuppr->setText("Dernière suppression : XX/XX/XXXX");
+    this->nbContact->setText("Nombre de contact :");
+    this->refreshStatusBar();
+}
+
+
+
 void MainWindow::refreshStatusBar()
 {
     // Nombre de contacts.
@@ -109,6 +124,34 @@ void MainWindow::refreshStatusBar()
     Date dLastSuppr = ContactModel::getDateSuppression();
     QString sLastSuppr = !dLastSuppr.isNull() ? StdQt::string(dLastSuppr.toString()) : "Pas de suppression récente";
     this->lastSuppr->setText("Dernière suppression : " + sLastSuppr + "\t");
+}
+
+void MainWindow::refreshFilteredContact()
+{
+    this->contactsFiltered = contacts;
+    Date dateMin;
+    Date dateMax;
+    string filterEntreprise;
+    string filterNom;
+    string filterPrenom;
+
+    // Date Filter
+    if (this->ui->checkBoxDateMin->isChecked()) dateMin = StdQt::date(this->ui->dateEditMin->date());
+    if (this->ui->checkBoxDateMax->isChecked()) dateMax = StdQt::date(this->ui->dateEditMax->date());
+
+    this->contactsFiltered.filterDateCreation(dateMin, dateMax);
+
+    // Filter Entreprise
+    if (!this->ui->lineEditFilterEntreprise->text().isEmpty()) filterEntreprise = StdQt::string(this->ui->lineEditFilterEntreprise->text());
+    this->contactsFiltered.filterEntreprise(filterEntreprise);
+
+    // Filter Nom
+    if (!this->ui->lineEditFilterNom->text().isEmpty()) filterNom = StdQt::string(this->ui->lineEditFilterNom->text());
+    this->contactsFiltered.filterNom(filterNom);
+
+    // Filter Prenom
+    if (!this->ui->lineEditFilterPrenom->text().isEmpty()) filterPrenom = StdQt::string(this->ui->lineEditFilterPrenom->text());
+    this->contactsFiltered.filterPrenom(filterPrenom);
 }
 
 void MainWindow::refreshTable()
@@ -153,43 +196,26 @@ void MainWindow::refreshTable()
     }
 }
 
-void MainWindow::statusBar()
+
+
+void MainWindow::creerContact()
 {
-    this->lastSuppr = new QLabel();
-    this->nbContact = new QLabel();
-    this->ui->statusbar->addWidget(this->lastSuppr, 0);
-    this->ui->statusbar->addWidget(this->nbContact, 0);
-    this->lastSuppr->setText("Dernière suppression : XX/XX/XXXX");
-    this->nbContact->setText("Nombre de contact :");
-    this->refreshStatusBar();
-}
+    ContactModel c;
 
-void MainWindow::refreshFilteredContact()
-{
-    this->contactsFiltered = contacts;
-    Date dateMin;
-    Date dateMax;
-    string filterEntreprise;
-    string filterNom;
-    string filterPrenom;
+    ContactEditWindow editC(c, false);
+    int ret = editC.exec();
 
-    // Date Filter
-    if (this->ui->checkBoxDateMin->isChecked()) dateMin = StdQt::date(this->ui->dateEditMin->date());
-    if (this->ui->checkBoxDateMax->isChecked()) dateMax = StdQt::date(this->ui->dateEditMax->date());
+    // Le contact a été créé.
+    if(ret == 1){
+        try {
+            daoContact->create(c);
+            contacts.add(c);
 
-    this->contactsFiltered.filterDateCreation(dateMin, dateMax);
-
-    // Filter Entreprise
-    if (!this->ui->lineEditFilterEntreprise->text().isEmpty()) filterEntreprise = StdQt::string(this->ui->lineEditFilterEntreprise->text());
-    this->contactsFiltered.filterEntreprise(filterEntreprise);
-
-    // Filter Nom
-    if (!this->ui->lineEditFilterNom->text().isEmpty()) filterNom = StdQt::string(this->ui->lineEditFilterNom->text());
-    this->contactsFiltered.filterNom(filterNom);
-
-    // Filter Prenom
-    if (!this->ui->lineEditFilterPrenom->text().isEmpty()) filterPrenom = StdQt::string(this->ui->lineEditFilterPrenom->text());
-    this->contactsFiltered.filterPrenom(filterPrenom);
+            refreshTable();
+        }  catch (std::runtime_error & e) {
+            QMessageBox::critical(this, "Erreur", e.what());
+        }
+    }
 }
 
 void MainWindow::editContact(QTableWidgetItem *item)
@@ -240,6 +266,26 @@ void MainWindow::editContact(QTableWidgetItem *item)
 }
 
 
+
+void MainWindow::resetFiltres()
+{
+    this->ui->lineEditFilterEntreprise->setText("");
+    this->ui->lineEditFilterNom->setText("");
+    this->ui->lineEditFilterPrenom->setText("");
+    this->ui->dateEditMin->setEnabled(false);
+    this->ui->dateEditMax->setEnabled(false);
+    this->ui->checkBoxDateMin->setChecked(false);
+    this->ui->checkBoxDateMax->setChecked(false);
+    this->refreshTable();
+}
+
+void MainWindow::filtrer()
+{
+    this->refreshTable();
+}
+
+
+
 void MainWindow::on_buttonOpenFilter_clicked()
 {
     if(isFilterOpen){
@@ -252,12 +298,18 @@ void MainWindow::on_buttonOpenFilter_clicked()
     }
 }
 
+void MainWindow::on_buttonRequest_clicked()
+{
+    RequeteWindow win(this->contacts);
+    win.exec();
+}
+
+
 
 void MainWindow::on_actionQuit_triggered()
 {
     this->close();
 }
-
 
 void MainWindow::on_actionExportJson_triggered()
 {
@@ -293,53 +345,6 @@ void MainWindow::on_actionResetAll_triggered()
     }
 }
 
-
-void MainWindow::resetFiltres()
-{
-    this->ui->lineEditFilterEntreprise->setText("");
-    this->ui->lineEditFilterNom->setText("");
-    this->ui->lineEditFilterPrenom->setText("");
-    this->ui->dateEditMin->setEnabled(false);
-    this->ui->dateEditMax->setEnabled(false);
-    this->ui->checkBoxDateMin->setChecked(false);
-    this->ui->checkBoxDateMax->setChecked(false);
-    this->refreshTable();
-}
-
-
-void MainWindow::filtrer()
-{
-    this->refreshTable();
-}
-
-
-void MainWindow::on_buttonRequest_clicked()
-{
-    RequeteWindow win(this->contacts);
-    win.exec();
-}
-
-
-void MainWindow::creerContact()
-{
-    ContactModel c;
-
-    ContactEditWindow editC(c, false);
-    int ret = editC.exec();
-
-    // Le contact a été créé.
-    if(ret == 1){
-        try {
-            daoContact->create(c);
-            contacts.add(c);
-
-            refreshTable();
-        }  catch (std::runtime_error & e) {
-            QMessageBox::critical(this, "Erreur", e.what());
-        }
-    }
-}
-
 void MainWindow::on_actionDonneesTest_triggered()
 {
     QMessageBox::StandardButton button = QMessageBox::question(this, "Question", "Voulez-vous insérer les données de test ? Les données existantes seront supprimées.");
@@ -361,4 +366,11 @@ void MainWindow::on_actionDonneesTest_triggered()
         }
     }
 }
+
+
+
+
+
+
+
 

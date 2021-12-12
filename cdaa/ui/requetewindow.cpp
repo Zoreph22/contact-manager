@@ -20,6 +20,8 @@ RequeteWindow::~RequeteWindow()
     delete this->ui;
 }
 
+
+
 void RequeteWindow::initWidgets()
 {
     this->ui->frameFiltresTodo->setVisible(false);
@@ -60,6 +62,8 @@ void RequeteWindow::refreshResults()
 
     this->ui->textEditResultats->setText(StdQt::string(ss.str()));
 }
+
+
 
 void RequeteWindow::queryInteractions()
 {
@@ -103,20 +107,19 @@ void RequeteWindow::rechercher()
     this->refreshResults();
 }
 
+
+
 void RequeteWindow::on_radioInteractions_toggled(bool checked)
 {
     if (checked) this->sujet = Sujet::Interactions;
 }
-
 
 void RequeteWindow::on_radioTodos_toggled(bool checked)
 {
     if (checked) this->sujet = Sujet::Todos;
 }
 
-
 void RequeteWindow::on_radioDatesTodo_toggled(bool checked)
 {
     if (checked) this->sujet = Sujet::DatesTodo;
 }
-

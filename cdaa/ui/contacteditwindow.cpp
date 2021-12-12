@@ -40,6 +40,7 @@ ContactEditWindow::~ContactEditWindow()
 }
 
 
+
 void ContactEditWindow::initWidgets()
 {
     // Désactiver le bouton Enregister s'il n'y a pas de nom ou prénom renseigné.
@@ -78,6 +79,8 @@ void ContactEditWindow::initWidgets()
     this->refreshInteractionsAndTodosTable();
 }
 
+
+
 void ContactEditWindow::supprimer()
 {
     QMessageBox::StandardButton button = QMessageBox::question(this, "Question", "Voulez-vous vraiment supprimer ce contact ?");
@@ -87,7 +90,6 @@ void ContactEditWindow::supprimer()
         this->done(2);
     }
 }
-
 
 void ContactEditWindow::enregistrer()
 {
@@ -109,11 +111,11 @@ void ContactEditWindow::enregistrer()
     }
 }
 
-
 void ContactEditWindow::annuler()
 {
     this->done(0);
 }
+
 
 
 void ContactEditWindow::creerInteraction()
@@ -141,18 +143,6 @@ void ContactEditWindow::creerInteraction()
             QMessageBox::critical(this, "Erreur", e.what());
         }
     }
-}
-
-
-void ContactEditWindow::on_lineEditPrenom_textChanged()
-{
-     ui->buttonEnregister->setDisabled(this->ui->lineEditPrenom->text().isEmpty() || this->ui->lineEditNom->text().isEmpty());
-}
-
-
-void ContactEditWindow::on_lineEditNom_textChanged()
-{
-    ui->buttonEnregister->setDisabled(this->ui->lineEditNom->text().isEmpty() || this->ui->lineEditPrenom->text().isEmpty());
 }
 
 void ContactEditWindow::editInteraction(QTableWidgetItem *item)
@@ -201,6 +191,32 @@ void ContactEditWindow::editInteraction(QTableWidgetItem *item)
         }
     }
 }
+
+void ContactEditWindow::editPhoto()
+{
+    // Charger l'image.
+    QString chemin = QFileDialog::getOpenFileName(this, QString(), QString(), "Image (*.png *.jpg *.jpeg)");
+    if(chemin.isEmpty()) return;
+
+    // Afficher la photo sur l'IHM.
+    QImage img(chemin);
+    QImage img2 = img.scaled(64,64, Qt::KeepAspectRatio);
+    QPixmap pixmap =  QPixmap::fromImage(img2);
+    this->ui->ButtonPhoto->setIcon(QIcon(pixmap));
+    this->ui->ButtonPhoto->setIconSize(QSize(64,64));
+
+    // Copier l'image chargée dans le répertoire des photos des contacts.
+    // Le nom de l'image porte l'identifiant du contact.
+    QFileInfo fileInfo(chemin);
+    QString destinationFile = "photos/" + StdQt::string(std::to_string(cm.getId())) + "." + fileInfo.suffix();
+    QFile::remove(destinationFile);
+    QFile::copy(chemin, destinationFile);
+
+    // Modifier l'URI de la photo du contact.
+    cm.setPhoto(StdQt::string(destinationFile));
+}
+
+
 
 void ContactEditWindow::refreshInteractionsAndTodosTable()
 {
@@ -258,26 +274,14 @@ void ContactEditWindow::refreshInteractionsAndTodosTable()
     this->ui->tableWidgetTodos->sortItems(0, Qt::AscendingOrder);
 }
 
-void ContactEditWindow::editPhoto()
+
+
+void ContactEditWindow::on_lineEditPrenom_textChanged()
 {
-    // Charger l'image.
-    QString chemin = QFileDialog::getOpenFileName(this, QString(), QString(), "Image (*.png *.jpg *.jpeg)");
-    if(chemin.isEmpty()) return;
+     ui->buttonEnregister->setDisabled(this->ui->lineEditPrenom->text().isEmpty() || this->ui->lineEditNom->text().isEmpty());
+}
 
-    // Afficher la photo sur l'IHM.
-    QImage img(chemin);
-    QImage img2 = img.scaled(64,64, Qt::KeepAspectRatio);
-    QPixmap pixmap =  QPixmap::fromImage(img2);
-    this->ui->ButtonPhoto->setIcon(QIcon(pixmap));
-    this->ui->ButtonPhoto->setIconSize(QSize(64,64));
-
-    // Copier l'image chargée dans le répertoire des photos des contacts.
-    // Le nom de l'image porte l'identifiant du contact.
-    QFileInfo fileInfo(chemin);
-    QString destinationFile = "photos/" + StdQt::string(std::to_string(cm.getId())) + "." + fileInfo.suffix();
-    QFile::remove(destinationFile);
-    QFile::copy(chemin, destinationFile);
-
-    // Modifier l'URI de la photo du contact.
-    cm.setPhoto(StdQt::string(destinationFile));
+void ContactEditWindow::on_lineEditNom_textChanged()
+{
+    ui->buttonEnregister->setDisabled(this->ui->lineEditNom->text().isEmpty() || this->ui->lineEditPrenom->text().isEmpty());
 }
