@@ -52,5 +52,6 @@ private slots:
     void on_dateEditMin_userDateChanged(const QDate &date);
 
     void on_itemDoubleClicked(QTableWidgetItem*item);
+    void on_actionDonneesTest_triggered();
 };
 #endif // MAINWINDOW_H

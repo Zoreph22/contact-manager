@@ -11,6 +11,7 @@ CONFIG += c++11
 SOURCES += \
     daodatabase.cpp \
     dumpjson.cpp \
+    managesqlite.cpp \
     sqlitedaocontact.cpp \
     sqlitedaogeneral.cpp \
     sqlitedaointeraction.cpp \
@@ -25,6 +26,8 @@ HEADERS += \
     idaointeraction.h \
     idaotodo.h \
     idump.h \
+    imanagedatabase.h \
+    managesqlite.h \
     sqlitedaocontact.h \
     sqlitedaogeneral.h \
     sqlitedaointeraction.h \

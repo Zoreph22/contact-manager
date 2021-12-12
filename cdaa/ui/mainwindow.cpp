@@ -37,18 +37,33 @@ MainWindow::~MainWindow()
     delete this->daoGeneral;
     delete this->daoInteraction;
     delete this->daoTodo;
+
+    DaoDatabase::close();
 }
 
 void MainWindow::init()
 {
-    DaoDatabase::openSQLite("../../database/database.db"); // TODO : changer ceci.
+    // Ouvrir la base de données.
+    try {
+        DaoDatabase::openSQLite("database.db");
+    }  catch (std::exception & e) {
+        QMessageBox::critical(this, "Erreur", "Erreur lors de l'initialisation de la base de données. Relancez l'application.");
+        return;
+    }
 
+    // Instanciation des DAO.
     this->daoContact = new SQLiteDaoContact();
     this->daoInteraction = new SQLiteDaoInteraction();
     this->daoTodo = new SQLiteDaoTodo();
     this->daoGeneral = new SQLiteDaoGeneral();
 
-    this->loadData();
+    // Charger les données.
+    try {
+        this->loadData();
+    }  catch (std::exception & e) {
+        QMessageBox::critical(this, "Erreur", "Impossible de charger les données. Essayez de réparer dans Fichier -> Réparer.");
+        qDebug() << e.what();
+    }
 }
 
 void MainWindow::loadData()
@@ -66,22 +81,6 @@ void MainWindow::loadData()
         for (InteractionModel & interaction : contact.getInteractions().getList())
         {
             interaction.getTodos().replace(daoTodo->readAll(interaction.getId()));
-        }
-    }
-
-    // TODO : enlever les logs ci-dessous.
-    for (ContactModel & contact : this->contacts.getList())
-    {
-        std::cout << contact << std::endl;
-
-        for (InteractionModel & interaction : contact.getInteractions().getList())
-        {
-            std::cout << interaction << std::endl;
-
-            for (TodoModel & todo : interaction.getTodos().getList())
-            {
-                std::cout << todo << std::endl;
-            }
         }
     }
 }
@@ -183,7 +182,6 @@ void MainWindow::on_actionExportJson_triggered()
     }
 }
 
-
 void MainWindow::on_actionResetAll_triggered()
 {
     QMessageBox::StandardButton button = QMessageBox::question(this, "Question", "Voulez-vous vraiment réinitialiser toutes les données ?");
@@ -240,4 +238,22 @@ void MainWindow::on_dateEditMin_userDateChanged(const QDate &date)
 
 }
 
+void MainWindow::on_actionDonneesTest_triggered()
+{
+    QMessageBox::StandardButton button = QMessageBox::question(this, "Question", "Voulez-vous insérer les données de test ? Les données existantes seront supprimées.");
+
+    if (button == QMessageBox::Yes)
+    {
+        try {
+            this->daoContact->destroyAll();
+            this->contacts.clear();
+            DaoDatabase::getManager()->insertMockData();
+            this->loadData();
+            this->refreshTable();
+        }  catch (std::exception & e) {
+            QMessageBox::critical(this, "Erreur", "Impossible d'insérer les données de test.");
+            qDebug() << e.what();
+        }
+    }
+}
 

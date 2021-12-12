@@ -1,13 +1,13 @@
 PRAGMA foreign_keys = ON;
 
 DROP TABLE IF EXISTS General;
-CREATE TABLE General (
+CREATE TABLE IF NOT EXISTS General (
   attribut            TEXT PRIMARY KEY NOT NULL,
   valeur              TEXT
 );
 
 DROP TABLE IF EXISTS Contact;
-CREATE TABLE Contact (
+CREATE TABLE IF NOT EXISTS Contact (
   id                  INTEGER PRIMARY KEY,
   nom                 TEXT NOT NULL CHECK (nom <> ""),
   prenom              TEXT NOT NULL CHECK (prenom <> ""),
@@ -20,7 +20,7 @@ CREATE TABLE Contact (
 );
 
 DROP TABLE IF EXISTS Interaction;
-CREATE TABLE Interaction (
+CREATE TABLE IF NOT EXISTS Interaction (
   id                  INTEGER PRIMARY KEY,
   contenu             TEXT NOT NULL CHECK (contenu <> ""),
   date_creation       TEXT NOT NULL DEFAULT (DATE('now')),
@@ -31,7 +31,7 @@ CREATE TABLE Interaction (
 );
 
 DROP TABLE IF EXISTS Todo;
-CREATE TABLE Todo (
+CREATE TABLE IF NOT EXISTS Todo (
   id                  INTEGER PRIMARY KEY,
   resume              TEXT NOT NULL CHECK (resume <> ""),
   date_realisation    TEXT NOT NULL DEFAULT (DATE('now')),
