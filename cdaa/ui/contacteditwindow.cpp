@@ -209,6 +209,7 @@ void ContactEditWindow::editPhoto()
     // Le nom de l'image porte l'identifiant du contact.
     QFileInfo fileInfo(chemin);
     QString destinationFile = "photos/" + StdQt::string(std::to_string(cm.getId())) + "." + fileInfo.suffix();
+    if (!QDir("photos").exists()) QDir().mkdir("photos");
     QFile::remove(destinationFile);
     QFile::copy(chemin, destinationFile);
 
