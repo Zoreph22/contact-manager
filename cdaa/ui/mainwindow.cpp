@@ -50,7 +50,7 @@ void MainWindow::init()
     try {
         DaoDatabase::openSQLite("database.db");
     }  catch (std::exception & e) {
-        QMessageBox::critical(this, "Erreur", "Erreur lors de l'initialisation de la base de données. Relancez l'application.");
+        QMessageBox::critical(this, "Erreur", "Erreur lors de l'initialisation de la base de données. Relancez l'application. Raison : " + QString(e.what()));
         return;
     }
 
