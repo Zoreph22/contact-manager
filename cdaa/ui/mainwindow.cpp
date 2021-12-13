@@ -166,6 +166,7 @@ void MainWindow::refreshTable()
 
     // Vider la table.
     this->ui->tableWidget->setRowCount(0);
+    this->ui->tableWidget->setSortingEnabled(false);
 
     // Remplir la table à patir des contacts filtrés.
     for(unsigned int i=0;i<nbC;i++){
@@ -195,6 +196,8 @@ void MainWindow::refreshTable()
         this->ui->tableWidget->setItem(i, 2, entreprise);
         this->ui->tableWidget->setItem(i, 3, datecreation);
     }
+
+    this->ui->tableWidget->setSortingEnabled(true);
 }
 
 
