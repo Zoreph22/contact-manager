@@ -107,7 +107,7 @@ void MainWindow::statusBar()
     this->ui->statusbar->addWidget(this->lastSuppr, 0);
     this->ui->statusbar->addWidget(this->nbContact, 0);
     this->lastSuppr->setText("Dernière suppression : XX/XX/XXXX");
-    this->nbContact->setText("Nombre de contact :");
+    this->nbContact->setText("Nombre de contacts :");
     this->refreshStatusBar();
 }
 
@@ -118,7 +118,7 @@ void MainWindow::refreshStatusBar()
     // Nombre de contacts.
     QString nbLabelContactCount;
     nbLabelContactCount.setNum(this->contacts.count());
-    this->nbContact->setText("Nombre de contact : " + nbLabelContactCount);
+    this->nbContact->setText("Nombre de contacts : " + nbLabelContactCount);
 
     // Date dernière suppression.
     Date dLastSuppr = ContactModel::getDateSuppression();
