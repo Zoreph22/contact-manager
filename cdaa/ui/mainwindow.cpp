@@ -157,6 +157,7 @@ void MainWindow::refreshFilteredContact()
 void MainWindow::refreshTable()
 {
     this->refreshFilteredContact();
+    this->refreshStatusBar();
 
     unsigned int nbC = this->contactsFiltered.count();
 
