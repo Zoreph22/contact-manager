@@ -317,6 +317,8 @@ void MainWindow::on_actionExportJson_triggered()
     QString chemin = QFileDialog::getSaveFileName(this, QString(), QString(), "JSON (*.json)");
     DumpJson dump(chemin);
 
+    if (chemin.isEmpty()) return;
+
     try {
         dump.dumpAll(this->contacts);
         QMessageBox::information(this, "Information", "Exportation des données en JSON avec succès.");

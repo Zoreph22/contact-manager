@@ -22,11 +22,11 @@ void testGlobal()
     // Création des interactions du contact.
     string contenu1 =
             "Mon interaction\n\n"
-            "@todo Format date 1 @date 01/10/2021\n"
-            "@todo Format date 2 @date 1-10-2021\n"
+            "@todo Format date 1 @date 01/10/2050\n"
+            "@todo Format date 2 @date 1-10-2050\n"
             "Un autre commentaire\n"
             "Encore un autre commentaire @todo Sans date\n\n"
-            " @todo Syntaxe@date 22/07/2000Un dernier commentaire ";
+            " @todo Syntaxe@date 22/07/2045Un dernier commentaire ";
 
     string contenu2 = "@todo Appeler chef";
 
