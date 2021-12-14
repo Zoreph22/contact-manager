@@ -461,11 +461,11 @@ void interactionModelUnitTests()
         // pour créer les instances TodoModel.
         string contenu =
                 "Mon interaction\n\n"
-                "@todo Format date 1 @date 01/10/2021\n"
-                "@todo Format date 2 @date 1-10-2021\n"
+                "@todo Format date 1 @date 01/10/2050\n"
+                "@todo Format date 2 @date 1-10-2050\n"
                 "Un autre commentaire\n"
                 "Encore un autre commentaire @todo Sans date\n\n"
-                " @todo Syntaxe@date 22/07/2000Un dernier commentaire ";
+                " @todo Syntaxe@date 22/07/2045Un dernier commentaire ";
 
         InteractionModel i(contenu);
         i.parseTodos();
@@ -478,10 +478,10 @@ void interactionModelUnitTests()
         TodoModel t3 = c.getIndex(2);
         TodoModel t4 = c.getIndex(3);
 
-        assert(t1.getResume() == "Format date 1" && t1.getDateTodo() == Date(1, 10, 2021));
-        assert(t2.getResume() == "Format date 2" && t2.getDateTodo() == Date(1, 10, 2021));
+        assert(t1.getResume() == "Format date 1" && t1.getDateTodo() == Date(1, 10, 2050));
+        assert(t2.getResume() == "Format date 2" && t2.getDateTodo() == Date(1, 10, 2050));
         assert(t3.getResume() == "Sans date" && t3.getDateTodo() == dNow);
-        assert(t4.getResume() == "Syntaxe" && t4.getDateTodo() == Date(22, 7, 2000));
+        assert(t4.getResume() == "Syntaxe" && t4.getDateTodo() == Date(22, 7, 2045));
     }
 
     cout << "TEST - TodoModel::operator<<() --> " << endl;
